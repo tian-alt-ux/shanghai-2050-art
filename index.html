@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#030615"><title>CONVERGENCE SH · 潮 / 脉 / 讯 · 上海2050</title>
+  <meta name="description" content="上海2050：潮 TIDE、脉 PULSE、讯 SIGNAL，探索自然节律、城市人文与信息传播。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23030615'/%3E%3Cpath d='M4 23L11 9L16 20L23 5L28 23' fill='none' stroke='%235de6ff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body data-mode="culture">
+  <main id="experience" aria-label="上海2050交互三维城市">
+    <canvas id="world" tabindex="0" aria-label="三维城市：拖动旋转，滚轮缩放，方向键移动视角，数字1、2、3切换潮脉讯"></canvas>
+    <div class="vignette" aria-hidden="true"></div><div class="scanlines" aria-hidden="true"></div>
+    <header><div class="identity"><span class="glass wordmark">CONVERGENCE</span><span class="city-mark">SH</span><span class="edition">SHANGHAI<br><b>2050</b></span></div><button id="about-button" class="glass about">ABOUT</button></header>
+    <nav class="layers" aria-label="场景切换"><div class="rail"><i id="rail-thumb"></i></div>
+      <button class="glass layer" data-layer="nature" aria-pressed="false"><span>TIDE</span><small>潮</small></button>
+      <button class="glass layer selected" data-layer="culture" aria-pressed="true"><span>PULSE</span><small>脉</small></button>
+      <button class="glass layer" data-layer="cloud" aria-pressed="false"><span>SIGNAL</span><small>讯</small></button>
+    </nav>
+    <div id="landmarks" aria-label="上海地标"></div>
+    <aside id="data-panel" class="data-panel"><section><h2 class="glass" id="stat-heading">DEMOGRAPHICS DATA</h2><p id="stat-copy">SHANGHAI 2050<br>文化与社区 · 艺术情景<br><strong>人与城市，在流动中连接</strong></p></section><section class="headlines"><h2 class="glass"><span id="news-date">2050</span> / <span id="news-title">FUTURE SIGNALS</span></h2><div class="word-window"><div id="words"></div></div></section></aside>
+    <div class="status"><span class="status-line"></span><span id="scenario-status">2050 情景 · 模拟</span><span class="sep">/</span><time id="clock">18:00:00</time></div>
+    <section class="chart-area" aria-label="城市情景数据"><div class="chart" id="chart-a"><div class="chart-title"><button id="metric-a" aria-label="切换左侧数据类型">SOCIAL</button><span id="summary-a">活动强度 · 模拟</span></div><canvas id="bars-a" aria-label="一天中的模拟活动强度"></canvas><div class="ticks"><span>00</span><span>12</span><span>24</span></div></div><div class="chart" id="chart-b"><div class="chart-title"><button id="metric-b" aria-label="切换右侧数据类型">METRO</button><span id="summary-b">出行节奏 · 模拟</span></div><canvas id="bars-b" aria-label="一天中的模拟出行强度"></canvas><div class="ticks"><span>00</span><span>12</span><span>24</span></div></div></section>
+    <footer><div class="instructions">拖动旋转 <span>·</span> <span id="zoom-hint">滚轮缩放 / 切换场景</span> <span>·</span> 1 / 2 / 3 切换</div><div class="transport"><button id="play" aria-label="暂停时间" title="暂停时间">Ⅱ</button><input id="timeline" type="range" min="0" max="1439" step="1" value="1080" aria-label="2050情景的一天，分钟"><button id="reset" title="重置视角">RESET</button><button id="sound" aria-pressed="false" title="开启生成环境声">SOUND OFF</button><button id="fullscreen" title="全屏">⛶</button></div></footer>
+    <div id="loading" role="status"><span>CONVERGENCE SH</span><p>正在展开上海的城市脉络<span class="loading-dots"> …</span></p></div>
+    <div id="error" hidden role="alert"><h2>三维画面暂时无法打开</h2><p>请使用支持 WebGL 的浏览器，或开启浏览器图形加速后重试。</p><button onclick="location.reload()">重新加载</button></div>
+  </main>
+  <dialog id="about-dialog"><button class="dialog-close" aria-label="关闭说明">CLOSE ×</button><p class="eyebrow">CONVERGENCE SH / SHANGHAI 2050</p><h1>上海，在流动中显影。</h1><p>一座城市同时活在三种节奏里：环境的涨落，人的往返，信息的传播。作品以2050为艺术愿景，让上海的自然、人文与数字生活在同一个空间中相遇。</p><div class="about-grid"><div><h2>三层画面</h2><p><b>潮 TIDE</b>　起伏线场描绘自然水汽系统，轮廓线表达相对水位，亮蓝区域表达水域与湿润程度。<br><b>脉 PULSE</b>　建筑、街区和蓝橙光点承载上海的文化、社区与活动，黄浦江光带穿过两岸。<br><b>讯 SIGNAL</b>　城市逐渐解体为抽象粒子与连接线，表现信息的汇聚、关联和传播。</p></div><div><h2>探索方式</h2><p>拖动旋转，滚轮缩放，右键拖动平移。点击左侧按钮或按 1 / 2 / 3 切换三层。底部可暂停、选择一天中的时刻、复位、开启声音及全屏。</p><p>图表标题可切换数据主题。点击“脉”层的地标查看说明。触屏支持单指旋转及双指缩放。</p></div></div><section class="interaction-setting" aria-labelledby="interaction-heading"><h2 id="interaction-heading">交互设置</h2><label><input id="zoom-layers" type="checkbox" checked aria-describedby="zoom-description"><span>滚轮缩放联动场景</span></label><p id="zoom-description">拉远 潮 TIDE → 中间 脉 PULSE → 拉近 讯 SIGNAL。<br>关闭后只缩放当前层；按钮与数字键始终可切换。</p></section><p class="credit">道路、水系与部分建筑轮廓来自 OpenStreetMap。地标及补充建筑为艺术化近似。环境、人文与信息强度采用合成情景，尚未接入实时 API 或经验证的2050预测模型。数据来源及视觉映射见下方说明。</p><p class="credit">视觉与交互研究参考 <a href="https://convergencela.com/" target="_blank" rel="noopener">ConvergenceLA</a>，原作由 Susan Narduli / Narduli Studio 与 Refik Anadol 创作。本作品为上海主题的独立实现。</p><p class="credit"><a href="./data-notes.html" target="_blank" rel="noopener">数据与艺术映射 ↗</a>　/　<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></dialog>
+  <dialog id="place-dialog"><button class="dialog-close" aria-label="关闭地标">CLOSE ×</button><p class="eyebrow" id="place-coord"></p><h1 id="place-name"></h1><p id="place-description"></p><p class="credit">现有地标 · 形体艺术化表达</p></dialog>
+  <script type="module" src="./app.js"></script>
+</body></html>
+
