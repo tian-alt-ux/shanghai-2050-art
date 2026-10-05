@@ -6,6 +6,41 @@ const $ = (id) => document.getElementById(id);
 const mobile = innerWidth < 700;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const state = { mode: 'culture', minute: 1080, playing: !reduced, nature: 0, cloud: 0, elapsed: 26, metrics: [0, 0], ready: false };
+// The city is prepared behind the introduction, but only runs while it is viewed.
+function artworkIsActive(){return !document.hidden&&(!document.body.dataset.view||document.body.dataset.view==='artwork')&&!document.querySelector('dialog[open]');}
+let language = 'en';
+try { language = localStorage.getItem('sh2050-language') === 'zh' ? 'zh' : 'en'; } catch {}
+const languageText = {
+ en: {
+  inspect: name => `Explore ${name}`,
+  zoomLinked: 'Scroll to zoom / switch scenes', zoomOnly: 'Scroll to zoom',
+  world: linked => `Interactive 3D Shanghai: drag to rotate, ${linked ? 'scroll out for TIDE, scroll in for SIGNAL, PULSE between them' : 'scroll to zoom'}, use arrow keys to move the view, or press 1, 2, 3 to switch scenes`,
+  chartSwitchA: 'Switch left chart metric', chartSwitchB: 'Switch right chart metric',
+  play: 'Play time', pause: 'Pause time', fullscreenError: 'Fullscreen is not supported by this browser',
+  soundOn: 'SOUND ON', soundOff: 'SOUND OFF', soundUnavailable: 'SOUND UNAVAILABLE', soundEnable: 'Enable generated ambience', soundDisable: 'Disable generated ambience',
+  statusOsm: '2050 SCENARIO · SIMULATED', statusSchematic: '2050 SCENARIO · SCHEMATIC MAP',
+  wordsCloud: ['2050 / FUTURE SIGNALS','CONNECTION','SYMBIOSIS','MOVEMENT','REASSEMBLY','CITY','MEMORY','ENCOUNTER','TIDES','FUTURES'],
+  wordsCulture: ['SHANGHAI / HUMAN SCENARIO','LANEWAY MEMORY','COMMUNITY ENCOUNTERS','RIVERSIDE COMMONS','CULTURE & CREATION','DIGITAL CITY MEMORY','COMMUNITIES IN MOTION','OPEN CULTURE','SHANGHAI · 2050'],
+  newsCloud: 'DATA CONNECTIONS', newsCulture: 'CULTURAL SIGNALS', headingCloud: 'DATA CLOUD', headingCulture: 'PEOPLE & CULTURE',
+  metricLabels: {community:'COMMUNITY',humidity:'HUMIDITY',stream:'DATA STREAM',archive:'CONNECTIONS',social:'SOCIAL',metro:'MOBILITY',news:'NEWS',weather:'WEATHER',climate:'CLIMATE',ocean:'WATER LEVEL'},
+  metricUnits: {community:'Community activity · simulated',humidity:'Atmospheric moisture · simulated',stream:'Transmission intensity · simulated',archive:'Connection intensity · simulated',social:'Activity intensity · simulated',metro:'Travel intensity · simulated',news:'Topic activity · speculative',weather:'Wind-field intensity · scenario',climate:'Seasonal heat · scenario',ocean:'Relative water level · simulated'}
+ },
+ zh: {
+  inspect: name => `查看${name}`,
+  zoomLinked: '滚轮缩放 / 切换场景', zoomOnly: '滚轮缩放',
+  world: linked => `三维城市：拖动旋转，${linked ? '滚轮拉远进入潮、拉近进入讯，中间为脉' : '滚轮缩放'}，方向键移动视角，数字1、2、3切换场景`,
+  chartSwitchA: '切换左侧数据类型', chartSwitchB: '切换右侧数据类型',
+  play: '播放时间', pause: '暂停时间', fullscreenError: '当前浏览器不支持全屏',
+  soundOn: '声音开', soundOff: '声音关', soundUnavailable: '声音不可用', soundEnable: '开启生成环境声', soundDisable: '关闭生成环境声',
+  statusOsm: '2050 情景 · 模拟', statusSchematic: '2050 情景 · 示意地图',
+  wordsCloud: ['2050 / 情景信号','连接 CONNECTION','共生 SYMBIOSIS','流动 MOVEMENT','重组 REASSEMBLY','城市 CITY','记忆 MEMORY','相遇 ENCOUNTER','潮汐 TIDES','未来 FUTURES'],
+  wordsCulture: ['上海 / 人文情景','里弄记忆','社区相遇','江岸公共空间','文化与创作','城市数字记忆','流动的社区','开放的文化','上海 · 2050'],
+  newsCloud: '数据连接', newsCulture: '文化信号', headingCloud: '数据云', headingCulture: '人文与文化',
+  metricLabels: {community:'社区',humidity:'湿度',stream:'数据流',archive:'关联',social:'社交',metro:'出行',news:'新闻',weather:'天气',climate:'气候',ocean:'水位'},
+  metricUnits: {community:'社区活动 · 模拟',humidity:'水汽强度 · 模拟',stream:'传播强度 · 模拟',archive:'关联强度 · 模拟',social:'活动强度 · 模拟',metro:'出行强度 · 模拟',news:'主题活跃度 · 构想',weather:'风场强度 · 情景',climate:'季节热量 · 情景',ocean:'相对水位 · 模拟'}
+ }
+};
+const t = () => languageText[language];
 const viewScale = mobile ? 1.35 : 1;
 const sceneViews = { nature:[4,110,164], culture:[22,46,88], cloud:[5,32,62] };
 let zoomLayers = true, previousDistance = 0, resettingView = false;
@@ -24,6 +59,16 @@ const landmarkData = [
   {name:'PEOPLE’S SQUARE',cn:'人民广场',lon:121.4752,lat:31.2304,h:1,kind:'label',description:'城市公共空间的汇聚节点。模拟的人群活动沿道路与轨道网络扩散，形成明暗变化的城市脉搏。'},
   {name:'SUZHOU CREEK',cn:'苏州河',lon:121.4840,lat:31.2446,h:0,kind:'label',description:'穿过城市的水脉。在自然场景中，水的流动与风场叠加；在城市场景中，它保留为连续的暗色留白。'}
 ];
+const landmarkDescriptionsEn = {
+ 'SHANGHAI TOWER': 'A vertical landmark in Lujiazui. Its point cloud spirals upward and converges with the surrounding flows of city light. The proportions of the existing building are artistically interpreted.',
+ 'ORIENTAL PEARL': 'The spheres and tower beside the Huangpu River dissolve into luminous particles. In this future scenario, they hold a trace of the city’s memory between the riverfront and Lujiazui.',
+ 'THE BUND': 'The historic riverfront becomes a low, dense band of light within the point cloud, responding to the vertical city on the opposite bank.',
+ 'WORLD FINANCIAL CENTER': 'A geometric landmark of Lujiazui. Its rectangular outline and upper opening are approximated in points and lines, adding a vertical rhythm to the city centre.',
+ 'JIN MAO TOWER': 'The stepped silhouette is translated into discrete points of light, breathing with the changing intensity of urban activity.',
+ 'PEOPLE’S SQUARE': 'A gathering point in the public city. Simulated human activity spreads along street and rail networks, creating a pulse of changing light.',
+ 'SUZHOU CREEK': 'A waterway through the city. In TIDE, its flow meets the wind field; in PULSE, it remains a continuous dark interval.'
+};
+let activePlace = null;
 landmarkData.forEach(p=>{[p.x,p.z]=project(p.lon,p.lat);p.h*=.48;});
 
 let renderer,scene,camera,controls,pointMaterial,flowMaterial,trafficMaterial,postMaterial;
@@ -122,8 +167,11 @@ function createLandmarks(){
   if(p.kind==='pearl'||p.kind==='step')for(let y=p.h*.85;y<p.h*1.07;y+=.06)addPoint(p.x,y,p.z,.7,.85,1,1.1);
  }
  const shown=landmarkData.filter(p=>p.kind!=='step'&&p.kind!=='portal');
- for(const p of shown){const el=document.createElement('button');el.className='landmark';el.innerHTML=`${p.name}<span>${p.cn}</span>`;el.setAttribute('aria-label',`查看${p.cn}`);el.onclick=()=>{ $('place-name').textContent=p.cn;$('place-description').textContent=p.description;$('place-coord').textContent=`${p.lat.toFixed(4)}° N / ${p.lon.toFixed(4)}° E`;$('place-dialog').showModal();};$('landmarks').append(el);labelElements.push({el,p});}
+ for(const p of shown){const el=document.createElement('button');el.className='landmark';el.onclick=()=>{activePlace=p;refreshOpenPlace();$('place-dialog').showModal();};$('landmarks').append(el);labelElements.push({el,p});}
+ refreshLandmarks();
 }
+function refreshLandmarks(){for(const {el,p} of labelElements){el.replaceChildren(document.createTextNode(language==='zh'?p.cn:p.name));el.setAttribute('aria-label',t().inspect(language==='zh'?p.cn:p.name));}}
+function refreshOpenPlace(){if(!activePlace)return;const p=activePlace;$('place-name').textContent=language==='zh'?p.cn:p.name;$('place-description').textContent=language==='zh'?p.description:landmarkDescriptionsEn[p.name];$('place-coord').textContent=`${p.lat.toFixed(4)}° N / ${p.lon.toFixed(4)}° E`;}
 
 function createFlows(){
  const positions=[];
@@ -182,10 +230,10 @@ function syncZoomLayer(){
 }
 function updateZoomSetting(){
  $('zoom-layers').checked=zoomLayers;
- $('zoom-hint').textContent=zoomLayers?'滚轮缩放 / 切换场景':'滚轮缩放';
- $('world').setAttribute('aria-label',`三维城市：拖动旋转，${zoomLayers?'滚轮拉远进入潮、拉近进入讯，中间为脉':'滚轮缩放'}，方向键移动视角，数字1、2、3切换场景`);
+ $('zoom-hint').textContent=zoomLayers?t().zoomLinked:t().zoomOnly;
+ $('world').setAttribute('aria-label',t().world(zoomLayers));
 }
-function updateWords(){const words=state.mode==='cloud'?['2050 / 情景信号','连接 CONNECTION','共生 SYMBIOSIS','流动 MOVEMENT','重组 REASSEMBLY','城市 CITY','记忆 MEMORY','相遇 ENCOUNTER','潮汐 TIDES','未来 FUTURES']:['上海 / 人文情景','里弄记忆','社区相遇','江岸公共空间','文化与创作','城市数字记忆','流动的社区','开放的文化','上海 · 2050'];$('words').replaceChildren(...[...words,...words].map(word=>{const d=document.createElement('div');d.textContent=word;return d;}));$('news-title').textContent=state.mode==='cloud'?'DATA CONNECTIONS':'CULTURAL SIGNALS';$('stat-heading').textContent=state.mode==='cloud'?'DATA CLOUD':'PEOPLE & CULTURE';}
+function updateWords(){const words=state.mode==='cloud'?t().wordsCloud:t().wordsCulture;$('words').replaceChildren(...[...words,...words].map(word=>{const d=document.createElement('div');d.textContent=word;return d;}));$('news-title').textContent=state.mode==='cloud'?t().newsCloud:t().newsCulture;$('stat-heading').textContent=state.mode==='cloud'?t().headingCloud:t().headingCulture;}
 
 const metrics={
  community:{label:'COMMUNITY',unit:'社区活动 · 模拟',color:'#a77af1',phase:2,fn:h=>.15+.5*Math.exp(-Math.pow((h-19)/3.8,2))+.20*Math.exp(-Math.pow((h-11)/3,2))},
@@ -200,23 +248,30 @@ const metrics={
  ocean:{label:'WATER LEVEL',unit:'相对水位 · 模拟',color:'#45c3ef',phase:7,fn:h=>.45+.35*Math.sin(h/12.42*Math.PI*2)},
 };
 const modeMetrics={culture:[['social','news'],['metro','community']],nature:[['ocean','humidity'],['weather','climate']],cloud:[['stream','social'],['archive','news']]};
-function drawCharts(){for(let panel=0;panel<2;panel++){const key=modeMetrics[state.mode][panel][state.metrics[panel]%modeMetrics[state.mode][panel].length],metric=metrics[key],letter=panel?'b':'a',canvas=$(`bars-${letter}`),ctx=canvas.getContext('2d'),rect=canvas.getBoundingClientRect();if(rect.width===0)continue;canvas.width=Math.round(rect.width*2);canvas.height=Math.round(rect.height*2);ctx.scale(2,2);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#8298b520';ctx.lineWidth=.5;for(let j=1;j<4;j++){ctx.beginPath();ctx.moveTo(w*j/4,0);ctx.lineTo(w*j/4,h);ctx.stroke();}const total=48;for(let i=0;i<total;i++){const hour=i/2,base=metric.fn(hour),mod=1,v=clamp(base*mod,.02,.98);ctx.fillStyle=metric.color;ctx.globalAlpha=hour<=state.minute/60?.92:.42;ctx.fillRect(5+i*(w-10)/total,h-v*(h-7),1.35,v*(h-7));}ctx.globalAlpha=1;ctx.fillStyle='#d4e7ff';const cursor=state.minute/1440*w;ctx.fillRect(cursor,0,1,h);$(`metric-${letter}`).textContent=metric.label;$(`summary-${letter}`).textContent=metric.unit;canvas.setAttribute('aria-label',`${metric.label}：${metric.unit}`);}}
+function drawCharts(){for(let panel=0;panel<2;panel++){const key=modeMetrics[state.mode][panel][state.metrics[panel]%modeMetrics[state.mode][panel].length],metric=metrics[key],letter=panel?'b':'a',canvas=$(`bars-${letter}`),ctx=canvas.getContext('2d'),rect=canvas.getBoundingClientRect();if(rect.width===0)continue;canvas.width=Math.round(rect.width*2);canvas.height=Math.round(rect.height*2);ctx.scale(2,2);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#8298b520';ctx.lineWidth=.5;for(let j=1;j<4;j++){ctx.beginPath();ctx.moveTo(w*j/4,0);ctx.lineTo(w*j/4,h);ctx.stroke();}const total=48;for(let i=0;i<total;i++){const hour=i/2,base=metric.fn(hour),mod=1,v=clamp(base*mod,.02,.98);ctx.fillStyle=metric.color;ctx.globalAlpha=hour<=state.minute/60?.92:.42;ctx.fillRect(5+i*(w-10)/total,h-v*(h-7),1.35,v*(h-7));}ctx.globalAlpha=1;ctx.fillStyle='#d4e7ff';const cursor=state.minute/1440*w;ctx.fillRect(cursor,0,1,h);const label=t().metricLabels[key],unit=t().metricUnits[key];$(`metric-${letter}`).textContent=label;$(`summary-${letter}`).textContent=unit;canvas.setAttribute('aria-label',`${label}: ${unit}`);}}
 
-let audioCtx,audioGain,audioOscillators=[];
-async function toggleSound(){try{if(!audioCtx){audioCtx=new AudioContext();audioGain=audioCtx.createGain();audioGain.gain.value=0;audioGain.connect(audioCtx.destination);for(const hz of [55,82.41,110.1]){const osc=audioCtx.createOscillator(),g=audioCtx.createGain();osc.type='sine';osc.frequency.value=hz;g.gain.value=.065;osc.connect(g);g.connect(audioGain);osc.start();audioOscillators.push(osc);}}await audioCtx.resume();const on=$('sound').getAttribute('aria-pressed')!=='true';audioGain.gain.setTargetAtTime(on?.45:0,audioCtx.currentTime,.7);$('sound').setAttribute('aria-pressed',String(on));$('sound').textContent=on?'SOUND ON':'SOUND OFF';}catch(e){$('sound').textContent='SOUND UNAVAILABLE';}}
-function installUI(){document.querySelectorAll('[data-layer]').forEach(el=>el.onclick=()=>setMode(el.dataset.layer));$('about-button').onclick=()=>$('about-dialog').showModal();document.querySelectorAll('.dialog-close').forEach(el=>el.onclick=()=>el.closest('dialog').close());document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));$('reset').onclick=resetView;$('sound').onclick=toggleSound;
+function updateSoundText(){window.SH2050_SOUND?.refresh?.();}
+function installUI(){document.querySelectorAll('[data-layer]').forEach(el=>el.onclick=()=>setMode(el.dataset.layer));$('about-button').onclick=()=>$('about-dialog').showModal();document.querySelectorAll('.dialog-close').forEach(el=>el.onclick=()=>el.closest('dialog').close());document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));$('reset').onclick=resetView;
  updateZoomSetting();
  $('zoom-layers').onchange=e=>{zoomLayers=e.target.checked;try{localStorage.setItem('shanghai2050.tidePulseSignal.zoomLayers',String(zoomLayers));}catch{}updateZoomSetting();if(zoomLayers&&!cameraDestination)syncZoomLayer();};
  controls.addEventListener('change',()=>{const distance=controls.getDistance(),zoomed=Math.abs(distance-previousDistance)>.005;previousDistance=distance;if(zoomLayers&&zoomed&&state.ready&&!resettingView&&!cameraDestination)syncZoomLayer();});
  $('play').onclick=()=>{state.playing=!state.playing;updatePlay();};$('timeline').oninput=e=>{state.minute=Number(e.target.value);state.playing=false;updatePlay();drawCharts();};$('metric-a').onclick=()=>{state.metrics[0]++;drawCharts();};$('metric-b').onclick=()=>{state.metrics[1]++;drawCharts();};
- $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){$('fullscreen').title='当前浏览器不支持全屏';}};
- addEventListener('keydown',e=>{if(document.querySelector('dialog[open]')||e.target.matches('input,textarea'))return;if(['1','2','3'].includes(e.key))setMode(['nature','culture','cloud'][Number(e.key)-1]);if(e.code==='Space'&&!e.target.matches('button')){e.preventDefault();state.playing=!state.playing;updatePlay();}if(e.key==='Home')resetView();});controls.listenToKeyEvents($('world'));updatePlay();updateWords();
+ $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){$('fullscreen').title=t().fullscreenError;}};
+ addEventListener('keydown',e=>{if(!artworkIsActive()||e.target.closest?.('input,textarea,select,[contenteditable="true"]'))return;if(['1','2','3'].includes(e.key))setMode(['nature','culture','cloud'][Number(e.key)-1]);if(e.code==='Space'&&!e.target.matches('button')){e.preventDefault();state.playing=!state.playing;updatePlay();}if(e.key==='Home')resetView();});controls.listenToKeyEvents($('world'));updatePlay();updateWords();updateSoundText();
  const context=document.modelContext;if(context?.registerTool){try{context.registerTool({name:'set_city_scene',description:'Switch Shanghai 2050 between TIDE (environment), PULSE (people) and SIGNAL (data cloud).' ,inputSchema:{type:'object',properties:{scene:{type:'string',enum:['tide','pulse','signal']}},required:['scene'],additionalProperties:false},annotations:{readOnlyHint:false},execute:async input=>{const mapping={tide:'nature',pulse:'culture',signal:'cloud'};if(!input||!mapping[input.scene])throw new Error('scene must be tide, pulse or signal');setMode(mapping[input.scene]);await new Promise(requestAnimationFrame);return{scene:input.scene,year:2050,data:'illustrative scenario'};}});}catch(e){console.info('Optional scene tool unavailable.');}}
 }
-function updatePlay(){$('play').textContent=state.playing?'Ⅱ':'▷';$('play').setAttribute('aria-label',state.playing?'暂停时间':'播放时间');$('play').title=state.playing?'暂停时间':'播放时间';}
+function updatePlay(){$('play').textContent=state.playing?'Ⅱ':'▷';$('play').setAttribute('aria-label',state.playing?t().pause:t().play);$('play').title=state.playing?t().pause:t().play;}
+function updateScenarioStatus(){$('scenario-status').textContent=dataSource==='osm'?t().statusOsm:t().statusSchematic;}
+function setLanguage(lang){language=lang==='zh'?'zh':'en';window.SH2050_LANG=language;try{localStorage.setItem('sh2050-language',language);}catch{}
+ if(state.ready){updateZoomSetting();updateWords();drawCharts();updatePlay();updateSoundText();updateScenarioStatus();refreshLandmarks();refreshOpenPlace();$('metric-a').setAttribute('aria-label',t().chartSwitchA);$('metric-b').setAttribute('aria-label',t().chartSwitchB);}
+ return language;
+}
+window.SH2050_LANG=language;
+window.SH2050=Object.assign(window.SH2050||{},{ready:false,setLanguage,getLanguage:()=>language});
+window.addEventListener('sh2050:language',event=>setLanguage(event.detail?.lang));
 
-let lastCharts=0,lastLabels=0;
-function animate(){requestAnimationFrame(animate);if(document.hidden)return;const dt=Math.min(clock.getDelta(),.06);if(state.playing){state.elapsed+=dt;state.minute=(state.minute+dt*1.6)%1440;}const t=state.elapsed;state.nature=lerp(state.nature,state.mode==='nature'?1:0,Math.min(1,dt*1.8));state.cloud=lerp(state.cloud,state.mode==='cloud'?1:0,Math.min(1,dt*1.8));const n=state.nature,c=state.cloud,hour=state.minute/60;
+let lastCharts=0,lastLabels=0,lastActivity=false;
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.06),active=artworkIsActive();controls.enabled=active;if(active!==lastActivity)lastActivity=active;if(!active)return;if(state.playing){state.elapsed+=dt;state.minute=(state.minute+dt*1.6)%1440;}const t=state.elapsed;state.nature=lerp(state.nature,state.mode==='nature'?1:0,Math.min(1,dt*1.8));state.cloud=lerp(state.cloud,state.mode==='cloud'?1:0,Math.min(1,dt*1.8));const n=state.nature,c=state.cloud,hour=state.minute/60;
  const channels={tide:metrics.ocean.fn(hour),humidity:metrics.humidity.fn(hour),wind:metrics.weather.fn(hour),stream:metrics.stream.fn(hour)};
  layerEffects.update(t,n,c,channels);
  if(cameraDestination){camera.position.lerp(cameraDestination,Math.min(1,dt*2));controls.target.lerp(new THREE.Vector3(),Math.min(1,dt*2));if(camera.position.distanceTo(cameraDestination)<.08)cameraDestination=null;}controls.update();
@@ -239,7 +294,7 @@ async function init(){try{
  const sceneParams=new URLSearchParams(location.search),sceneNames={tide:'nature',pulse:'culture',signal:'cloud'},initialMode=sceneNames[sceneParams.get('scene')];
  if(initialMode){resettingView=true;setMode(initialMode,false);camera.position.set(...sceneViews[initialMode]).multiplyScalar(viewScale);state.nature=initialMode==='nature'?1:0;state.cloud=initialMode==='cloud'?1:0;controls.update();previousDistance=controls.getDistance();resettingView=false;}
  if(sceneParams.get('paused')==='1'){state.playing=false;updatePlay();}
- document.body.dataset.mapSource=dataSource;$('scenario-status').textContent=dataSource==='osm'?'2050 情景 · 模拟':'2050 情景 · 示意地图';document.body.dataset.pointCount=String(cityPos.length/3);$('loading').classList.add('loaded');setTimeout(()=>$('loading').remove(),1100);animate();
+ document.body.dataset.mapSource=dataSource;document.body.dataset.pointCount=String(cityPos.length/3);setLanguage(language);$('loading').classList.add('loaded');setTimeout(()=>$('loading').remove(),1100);window.SH2050.ready=true;animate();window.dispatchEvent(new CustomEvent('sh2050:ready',{detail:{scene:state.mode}}));
  console.info(`Shanghai artwork ready: ${cityPos.length/3} city points, ${roadSegments.length} roads, source: ${dataSource}`);
- }catch(error){console.error(error);const pending=$('loading');if(pending)pending.remove();$('error').hidden=false;}}
+ }catch(error){console.error(error);window.SH2050.error=error.message;const pending=$('loading');if(pending)pending.remove();$('error').hidden=false;window.dispatchEvent(new CustomEvent('sh2050:error',{detail:{message:error.message}}));}}
 init();
