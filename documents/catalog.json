@@ -1,0 +1,121 @@
+{
+  "documents": [
+    {
+      "id": "digital",
+      "file": "digital-shanghai.pdf",
+      "format": "PDF",
+      "pages": 16,
+      "title": {
+        "en": "Digital Shanghai · 15th Five-Year Plan",
+        "zh": "上海市“数字上海”建设“十五五”规划"
+      },
+      "summary": {
+        "en": "Public data, computing infrastructure, intelligent governance and inclusive digital services. Context for the SIGNAL layer.",
+        "zh": "公共数据、算力基础设施、智能治理与普惠数字服务，为“讯 SIGNAL”层提供规划背景。"
+      },
+      "noticeDate": "2026-07-28",
+      "noticeNumber": "沪府办发〔2026〕18号",
+      "horizon": "2026–2030",
+      "issuer": {
+        "en": "General Office of the Shanghai Municipal People’s Government",
+        "zh": "上海市人民政府办公厅"
+      },
+      "originalFilename": "上海市人民政府办公厅关于印发《上海市“数字上海”建设“十五五”规划》的通知(1).pdf",
+      "layer": "SIGNAL",
+      "originalLanguage": "zh",
+      "sourceUrl": null,
+      "sha256": "de67dacf4d03f60eda716c86cea9aa080685db55177f0fd6f93fc61376af1ca9",
+      "provenance": "User-provided original file; title, notice number and date transcribed from the document. No source URL was present in the supplied file.",
+      "englishMetadata": "Editorial translation for navigation; not an official translation of the document."
+    },
+    {
+      "id": "beautiful",
+      "file": "beautiful-shanghai.pdf",
+      "format": "PDF",
+      "pages": 20,
+      "title": {
+        "en": "Beautiful Shanghai · 15th Five-Year Plan",
+        "zh": "美丽上海建设“十五五”规划"
+      },
+      "summary": {
+        "en": "Air and water quality, climate action, ecological protection and green urban spaces. Context for the TIDE layer.",
+        "zh": "空气与水环境、气候行动、生态保护及城市绿色空间，为“潮 TIDE”层提供规划背景。"
+      },
+      "noticeDate": "2026-09-01",
+      "noticeNumber": "沪府发〔2026〕16号",
+      "horizon": "2026–2030",
+      "issuer": {
+        "en": "Shanghai Municipal People’s Government",
+        "zh": "上海市人民政府"
+      },
+      "originalFilename": "上海市人民政府关于印发《美丽上海建设“十五五”规划》的通知(1).pdf",
+      "layer": "TIDE",
+      "originalLanguage": "zh",
+      "sourceUrl": null,
+      "sha256": "f84f06f4e53f0985fd0c25708e5bda9f580adcb99a5b2162fb4b584a31d543f0",
+      "provenance": "User-provided original file; title, notice number and date transcribed from the document. No source URL was present in the supplied file.",
+      "englishMetadata": "Editorial translation for navigation; not an official translation of the document."
+    },
+    {
+      "id": "industries",
+      "file": "emerging-industries.pdf",
+      "format": "PDF",
+      "pages": 20,
+      "title": {
+        "en": "Strategic Emerging Industries · 15th Five-Year Plan",
+        "zh": "上海市战略性新兴产业发展“十五五”规划"
+      },
+      "summary": {
+        "en": "Industrial innovation, emerging technologies, services, talent and development spaces. Context for the PULSE and SIGNAL layers.",
+        "zh": "产业创新、新兴技术、服务业态、人才与发展空间，为“脉 PULSE”及“讯 SIGNAL”层提供规划背景。"
+      },
+      "noticeDate": "2026-07-27",
+      "noticeNumber": "沪府办发〔2026〕19号",
+      "horizon": "2026–2030",
+      "issuer": {
+        "en": "General Office of the Shanghai Municipal People’s Government",
+        "zh": "上海市人民政府办公厅"
+      },
+      "originalFilename": "上海市人民政府办公厅关于印发《上海市战略性新兴产业发展“十五五”规划》的通知(1).pdf",
+      "layer": "PULSE / SIGNAL",
+      "originalLanguage": "zh",
+      "sourceUrl": null,
+      "sha256": "45c5a0616378ac9d9a274b9ed9390820949ff342396806540a1f39b53d9ec495",
+      "provenance": "User-provided original file; title, notice number and date transcribed from the document. No source URL was present in the supplied file.",
+      "englishMetadata": "Editorial translation for navigation; not an official translation of the document."
+    },
+    {
+      "id": "master",
+      "file": "master-plan.docx",
+      "format": "DOCX",
+      "pages": null,
+      "paragraphs": 14,
+      "title": {
+        "en": "State Council Approval · Shanghai Master Plan",
+        "zh": "国务院关于上海市城市总体规划的批复"
+      },
+      "summary": {
+        "en": "Urban form, ecological boundaries, public services, cultural heritage and resilience. The approval concerns the Shanghai Master Plan for 2017–2035.",
+        "zh": "涉及城市空间、生态底线、公共服务、文化遗产与韧性，批复所涉规划为《上海市城市总体规划（2017—2035年）》。"
+      },
+      "noticeDate": null,
+      "noticeNumber": "国函〔2017〕147号",
+      "horizon": "2017–2035",
+      "issuer": {
+        "en": "State Council of the People’s Republic of China",
+        "zh": "国务院"
+      },
+      "originalFilename": "国务院关于上海市城市总体规划的批复（2018~2035）(1).docx",
+      "layer": "TIDE / PULSE / SIGNAL",
+      "note": {
+        "en": "The uploaded filename says 2018–2035. This catalog uses 2017–2035, the period stated in the document itself. The supplied copy has no signing date.",
+        "zh": "上传文件名写为2018—2035；目录按正文所载2017—2035显示。此份文件未包含签署日期。"
+      },
+      "originalLanguage": "zh",
+      "sourceUrl": null,
+      "sha256": "1c2c3296e9625e43b45e04a1d70a7ce7efcd6fa10f4889e8c48a92c8b7b96f68",
+      "provenance": "User-provided original file; title, notice number and date transcribed from the document. No source URL was present in the supplied file.",
+      "englishMetadata": "Editorial translation for navigation; not an official translation of the document."
+    }
+  ]
+}

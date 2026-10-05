@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05080c">
+  <title>Planning Library · Shanghai 2050</title>
+  <style>
+    :root{color-scheme:dark;--ink:#05080c;--white:#eff4f7;--muted:#9aa9b8;--cyan:#7ce9ff;--line:rgba(172,195,215,.2);--mono:Consolas,'Courier New',monospace;--display:'Arial Narrow','Bahnschrift Condensed','Segoe UI',sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--white);font-family:var(--display);min-height:100vh}body:before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 12% 8%,rgba(81,117,155,.12),transparent 52%),repeating-linear-gradient(90deg,transparent,transparent calc(33.333vw - 1px),rgba(177,202,222,.065) 33.333vw);pointer-events:none}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}a,button{touch-action:manipulation}a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}header{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px clamp(22px,4.4vw,82px);border-bottom:1px solid var(--line)}.back,.languages,.eyebrow,.meta,.action,.note,.catalog-label{font-family:var(--mono);font-size:11px;letter-spacing:.13em;line-height:1.6}.back{min-height:44px;display:inline-flex;align-items:center;gap:12px}.back span:first-child{font-size:20px;color:var(--cyan)}.languages{display:flex;align-items:center;gap:10px;color:var(--muted)}.languages button{min-width:34px;min-height:44px;padding:0 2px;font-family:var(--mono);font-size:12px}.languages button[aria-pressed=true]{color:var(--white)}.languages span{color:#516071}main{padding:54px clamp(22px,4.4vw,82px) 50px;max-width:1800px;margin:auto}.eyebrow{color:var(--cyan);margin:0 0 18px}.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.42fr);gap:5vw;align-items:end;margin-bottom:32px}h1{font-size:clamp(34px,4.7vw,75px);font-weight:600;letter-spacing:-.035em;line-height:1.02;text-transform:uppercase;margin:0;max-width:1000px}.summary{font-size:17px;line-height:1.65;color:var(--muted);max-width:55ch;margin:22px 0 0}.meta{color:var(--muted);letter-spacing:.06em;display:grid;gap:14px;padding-left:24px;border-left:1px solid var(--line)}.meta strong{font-weight:400;display:block;color:var(--white);font-size:12px;letter-spacing:.05em;margin-top:4px}.tools{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:24px}.tools-actions{display:flex;flex-wrap:wrap;gap:12px}.action{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border:1px solid var(--line);min-height:44px;transition:background .2s,border-color .2s}.action:hover{background:rgba(124,233,255,.08);border-color:var(--cyan)}.note{color:var(--muted);letter-spacing:.035em;max-width:73ch;margin:0}.reader-frame{display:block;width:100%;height:min(80vh,1050px);min-height:500px;border:1px solid var(--line);background:#e9ecef}.original-text{background:#f3f3ee;color:#1c252d;padding:clamp(24px,4vw,64px);max-width:1050px;margin:auto;font-family:'Noto Serif SC','Songti SC',SimSun,serif;font-size:18px;line-height:1.95;overflow-wrap:anywhere}.original-text h2{font-size:clamp(22px,3vw,32px);line-height:1.5;text-align:center;margin:0 0 20px;font-weight:600}.original-text p{margin:0 0 1.3em;white-space:pre-wrap}.original-text p:nth-of-type(1){text-align:center}.reader-help{font-size:14px;color:var(--muted);line-height:1.7;margin:16px 0 0}.document-note{color:var(--muted);font-size:14px;line-height:1.7;max-width:80ch;padding:15px 0;border-top:1px solid var(--line);margin:24px 0 0}.catalog{margin-top:48px;border-top:1px solid var(--line);padding-top:24px}.catalog-label{color:var(--muted);margin:0 0 15px}.catalog-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.catalog-links a{border:1px solid var(--line);padding:18px;min-height:102px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;font-size:16px;line-height:1.35;transition:border-color .2s}.catalog-links a:hover,.catalog-links a[aria-current=page]{border-color:var(--cyan)}.catalog-links small{font:10px var(--mono);letter-spacing:.12em;color:var(--muted)}[hidden]{display:none!important}.error{border:1px solid var(--line);padding:24px;color:var(--muted)}
+    @media(max-width:800px){main{padding-top:34px}.intro{grid-template-columns:1fr;gap:24px}.meta{display:flex;flex-wrap:wrap;gap:24px;padding-left:0;border:0}.tools{align-items:flex-start;flex-direction:column}.reader-frame{height:74vh;min-height:450px}.catalog-links{grid-template-columns:repeat(2,1fr)}.original-text{font-size:17px}}
+    @media(max-width:450px){header{gap:12px}.back{font-size:10px;letter-spacing:.06em}.catalog-links{grid-template-columns:1fr}.reader-frame{min-height:410px}.original-text{padding:24px 19px}.action{padding:11px 13px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+    .reader-modes{display:flex;gap:6px;margin:0 0 22px}.reader-modes button{font:11px var(--mono);letter-spacing:.1em;min-height:40px;padding:10px 16px;border:1px solid var(--line);color:var(--muted)}.reader-modes button[aria-pressed=true]{color:var(--white);border-color:var(--cyan)}.pdf-pages{max-width:1135px;margin:auto;display:grid;gap:24px}.pdf-page{margin:0}.pdf-page a{display:block}.pdf-page img{display:block;width:100%;height:auto;background:#fafafa;border:1px solid var(--line)}.pdf-page figcaption{font:11px var(--mono);color:var(--muted);padding:10px 0;letter-spacing:.09em}
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back" id="back" href="../index.html?menu=plans"><span aria-hidden="true">←</span><span id="back-label">RETURN TO SHANGHAI 2050</span></a>
+    <nav class="languages" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button data-lang="zh" aria-pressed="false">中文</button></nav>
+  </header>
+  <main id="main" aria-busy="true">
+    <p class="eyebrow" id="eyebrow">PLANNING LIBRARY / SHANGHAI</p>
+    <section class="intro" aria-labelledby="title">
+      <div><h1 id="title">The city’s long view.</h1><p class="summary" id="summary">Loading the document…</p></div>
+      <div class="meta" id="meta"></div>
+    </section>
+    <div class="tools">
+      <div class="tools-actions"><a class="action" id="open-original" target="_blank" rel="noopener">OPEN ORIGINAL ↗</a><a class="action" id="download-original" download>DOWNLOAD ↓</a></div>
+      <p class="note" id="translation-note">Original document in Chinese. English titles and summaries are provided for navigation.</p>
+    </div>
+    <div class="reader-modes" id="reader-modes" aria-label="Reading mode" hidden><button id="pages-mode" aria-pressed="true">PAGE VIEW</button><button id="pdf-mode" aria-pressed="false">NATIVE PDF VIEW</button></div>
+    <section id="reader" aria-label="Original document"></section>
+    <p class="reader-help" id="reader-help"></p>
+    <p class="document-note" id="document-note" hidden></p>
+    <nav class="catalog" aria-label="Planning documents"><p class="catalog-label" id="catalog-label">EXPLORE THE PLANNING LIBRARY</p><div class="catalog-links" id="catalog-links"></div></nav>
+  </main>
+  <script type="module">
+    const params = new URLSearchParams(location.search);
+    let language = params.get('lang') === 'zh' ? 'zh' : 'en';
+    let id = params.get('id') || 'digital';
+    let catalog = [], paragraphs = null, readingMode = 'pages';
+    const $ = selector => document.querySelector(selector);
+    const words = {
+      en:{back:'RETURN TO SHANGHAI 2050',eyebrow:'PLANNING LIBRARY / SHANGHAI',date:'NOTICE DATE',horizon:'PLANNING HORIZON',format:'ORIGINAL',issuer:'ISSUED BY',pages:'pages',open:'OPEN ORIGINAL ↗',download:'DOWNLOAD ↓',translation:'Original document in Chinese. English titles and summaries are editorial translations for navigation, not official translations.',helpPDF:'If the PDF does not display in your browser, use OPEN ORIGINAL or DOWNLOAD above.',helpText:'The text below is extracted from the supplied Word document and retains its original Chinese wording. The Word file is available to download above.',catalog:'EXPLORE THE PLANNING LIBRARY',unavailable:'The document could not be loaded. Please refresh the page or return to the artwork.',undated:'Signing date not included in supplied copy',reader:'Original Chinese document',library:'Planning Library'},
+      zh:{back:'返回上海 2050',eyebrow:'规划资料库 / 上海',date:'通知日期',horizon:'规划周期',format:'原文件',issuer:'发布单位',pages:'页',open:'打开原文件 ↗',download:'下载原文件 ↓',translation:'原文件为中文。英文标题及摘要由作品目录提供，仅用于导航，并非文件的官方译文。',helpPDF:'若浏览器未显示 PDF，请使用上方“打开原文件”或“下载原文件”。',helpText:'以下文字从所提供的 Word 文件提取，保留原始中文措辞。上方可下载 Word 原文件。',catalog:'继续阅读规划资料',unavailable:'未能加载文件，请刷新页面或返回作品。',undated:'所提供文件未含签署日期',reader:'中文原文件',library:'规划资料库'}
+    };
+    const clean = value => {const node=document.createElement('span');node.textContent=value;return node.innerHTML;};
+    function render(){
+      const c=words[language], doc=catalog.find(item=>item.id===id) || catalog[0];
+      if(!doc)return; id=doc.id;
+      document.documentElement.lang=language;
+      document.title=`${doc.title[language]} · Shanghai 2050`;
+      $('#back').href=`../index.html?menu=plans&lang=${language}`;
+      $('#back-label').textContent=c.back;
+      $('.languages').setAttribute('aria-label',language==='zh'?'语言':'Language');
+      document.querySelectorAll('[data-lang]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.lang===language)));
+      $('#eyebrow').textContent=c.eyebrow;
+      $('#title').textContent=doc.title[language];
+      $('#summary').textContent=doc.summary[language];
+      const date=doc.noticeDate || c.undated;
+      $('#meta').innerHTML=`<div>${clean(c.horizon)}<strong>${clean(doc.horizon)}</strong></div><div>${clean(c.date)}<strong>${clean(date)}</strong></div><div>${clean(c.format)}<strong>${clean(doc.format)}${doc.pages?' · '+doc.pages+' '+c.pages:''}</strong></div><div>${clean(c.issuer)}<strong>${clean(doc.issuer[language])}</strong></div>`;
+      $('#open-original').href=doc.file;
+      $('#download-original').href=doc.file;
+      $('#open-original').textContent=c.open;
+      $('#download-original').textContent=c.download;
+      $('#translation-note').textContent=c.translation;
+      $('#reader').setAttribute('aria-label',c.reader);
+      $('#reader-modes').hidden=doc.format!=='PDF';
+      $('#reader-modes').setAttribute('aria-label',language==='zh'?'阅读模式':'Reading mode');
+      $('#pages-mode').textContent=language==='zh'?'原页面阅读':'PAGE VIEW';
+      $('#pdf-mode').textContent=language==='zh'?'浏览器 PDF 阅读':'NATIVE PDF VIEW';
+      $('#pages-mode').setAttribute('aria-pressed',String(readingMode==='pages'));
+      $('#pdf-mode').setAttribute('aria-pressed',String(readingMode==='pdf'));
+      const reader=$('#reader');
+      if(doc.format==='PDF'){
+        const viewKey=doc.id+'-'+readingMode+'-'+language;
+        if(reader.dataset.document!==viewKey){
+          if(readingMode==='pdf'){const frame=document.createElement('iframe');frame.className='reader-frame';frame.src=doc.file+'#view=FitH';frame.title=c.reader;reader.replaceChildren(frame);}
+          else {const pages=document.createElement('div');pages.className='pdf-pages';for(let page=1;page<=doc.pages;page++){const figure=document.createElement('figure');figure.className='pdf-page';const src=`./${doc.id}/page-${String(page).padStart(2,'0')}.jpg`;const link=document.createElement('a');link.href=src;link.target='_blank';link.rel='noopener';const image=document.createElement('img');image.src=src;image.alt=(language==='zh'?'原文件第':'Original document · page ')+page+(language==='zh'?'页':'');image.loading=page===1?'eager':'lazy';image.decoding='async';image.width=1273;image.height=1800;const caption=document.createElement('figcaption');caption.textContent=(language==='zh'?'第 ':'PAGE ')+page+' / '+doc.pages+(language==='zh'?' · 点击页面放大':' · SELECT PAGE TO ENLARGE');link.append(image);figure.append(link,caption);pages.append(figure);}reader.replaceChildren(pages);}
+          reader.dataset.document=viewKey;
+        }
+      }else if(paragraphs){
+        if(reader.dataset.document!==doc.id){const article=document.createElement('article');article.className='original-text';article.lang='zh';paragraphs.forEach((text,index)=>{const node=document.createElement(index===0?'h2':'p');node.textContent=text;article.append(node);});reader.replaceChildren(article);reader.dataset.document=doc.id;}
+      }
+      $('#reader-help').textContent=doc.format==='PDF'?(readingMode==='pdf'?c.helpPDF:(language==='zh'?'原 PDF 页面按需加载。点击页面可放大查看，原文件可通过上方按钮打开或下载。':'Original PDF pages load as you read. Select a page to enlarge it; the original file is available above.')):c.helpText;
+      $('#document-note').hidden=!doc.note;
+      if(doc.note)$('#document-note').textContent=doc.note[language];
+      $('#catalog-label').textContent=c.catalog;
+      const links=$('#catalog-links');links.replaceChildren();
+      catalog.forEach(item=>{const link=document.createElement('a');link.href=`?id=${item.id}&lang=${language}`;if(item.id===id)link.setAttribute('aria-current','page');const title=document.createElement('span');title.textContent=item.title[language];const meta=document.createElement('small');meta.textContent=item.horizon+' / '+item.format;link.append(title,meta);links.append(link);});
+      $('#main').setAttribute('aria-busy','false');
+      history.replaceState(null,'',`?id=${id}&lang=${language}`);
+    }
+    document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>{language=button.dataset.lang;render();}));
+    $('#pages-mode').addEventListener('click',()=>{readingMode='pages';render();});
+    $('#pdf-mode').addEventListener('click',()=>{readingMode='pdf';render();});
+    try{
+      const result=await fetch('./catalog.json');if(!result.ok)throw new Error('catalog');catalog=(await result.json()).documents;
+      if(id==='master'){const response=await fetch('./master-plan.json');if(!response.ok)throw new Error('master');paragraphs=await response.json();}
+      render();
+    }catch{
+      $('#summary').textContent=words[language].unavailable;$('#main').setAttribute('aria-busy','false');$('.tools').hidden=true;$('.catalog').hidden=true;
+    }
+  </script>
+</body>
+</html>
