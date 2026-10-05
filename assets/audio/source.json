@@ -1,0 +1,7 @@
+{
+  "backgroundTrack": "space-01.mp3",
+  "source": "https://claudiuangheloni.com/assets/space-01.mp3",
+  "referenceImplementation": "https://claudiuangheloni.com/audio.js?v=20260917-seo-v2",
+  "retrievedAt": "2026-10-05",
+  "notes": "Reference soundtrack retained for the requested local prototype. UI tick sounds are generated with the reference frequencies and envelopes."
+}
