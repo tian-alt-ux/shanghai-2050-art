@@ -1,0 +1,24 @@
+{
+  "words": [
+    {"id":"coexistence","text":"Coexistence","labelZh":"共生","labelEn":"Coexistence","count":0,"seed":true},
+    {"id":"waterfront-living","text":"Waterfront living","labelZh":"滨水生活","labelEn":"Waterfront living","count":0,"seed":true},
+    {"id":"cultural-memory","text":"Cultural memory","labelZh":"文化记忆","labelEn":"Cultural memory","count":0,"seed":true},
+    {"id":"walkable-city","text":"Walkable city","labelZh":"步行城市","labelEn":"Walkable city","count":0,"seed":true},
+    {"id":"open-communities","text":"Open communities","labelZh":"开放社区","labelEn":"Open communities","count":0,"seed":true},
+    {"id":"clean-air","text":"Clean air","labelZh":"清洁空气","labelEn":"Clean air","count":0,"seed":true},
+    {"id":"blue-green-harmony","text":"Blue-green harmony","labelZh":"蓝绿共生","labelEn":"Blue-green harmony","count":0,"seed":true},
+    {"id":"public-space","text":"Public space","labelZh":"公共空间","labelEn":"Public space","count":0,"seed":true},
+    {"id":"resilience","text":"Resilience","labelZh":"韧性城市","labelEn":"Resilience","count":0,"seed":true},
+    {"id":"digital-memories","text":"Digital memories","labelZh":"数字记忆","labelEn":"Digital memories","count":0,"seed":true},
+    {"id":"neighbourhood","text":"Neighbourhood","labelZh":"邻里","labelEn":"Neighbourhood","count":0,"seed":true},
+    {"id":"inclusion","text":"Inclusion","labelZh":"包容","labelEn":"Inclusion","count":0,"seed":true},
+    {"id":"green-mobility","text":"Green mobility","labelZh":"绿色出行","labelEn":"Green mobility","count":0,"seed":true},
+    {"id":"urban-warmth","text":"Urban warmth","labelZh":"城市温度","labelEn":"Urban warmth","count":0,"seed":true},
+    {"id":"slower-pace","text":"A slower pace","labelZh":"更慢的生活","labelEn":"A slower pace","count":0,"seed":true},
+    {"id":"connection","text":"Connection","labelZh":"人与人的连接","labelEn":"Connection","count":0,"seed":true},
+    {"id":"innovation","text":"Innovation","labelZh":"创新","labelEn":"Innovation","count":0,"seed":true},
+    {"id":"future-education","text":"Future education","labelZh":"未来教育","labelEn":"Future education","count":0,"seed":true},
+    {"id":"people-and-nature","text":"People and nature","labelZh":"人与自然","labelEn":"People and nature","count":0,"seed":true},
+    {"id":"sustainability","text":"Sustainable development","labelZh":"可持续发展","labelEn":"Sustainable development","count":0,"seed":true}
+  ]
+}

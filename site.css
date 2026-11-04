@@ -543,23 +543,18 @@ body[data-view="art"] .site-shell {
 
 .plan-list { border-top: 1px solid rgba(208, 229, 241, .37); }
 .plan-card {
-  position: relative;
   display: grid;
-  grid-template-columns: 140px minmax(0, 1fr) 22px;
+  grid-template-columns: 140px minmax(0, 1fr);
   column-gap: 20px;
   align-items: start;
   min-height: 119px;
-  padding: 22px 12px 21px 0;
+  padding: 22px 0 21px;
   border-bottom: 1px solid rgba(208, 229, 241, .2);
-  text-decoration: none;
   color: #eaf3f6;
-  transition: background .2s ease, padding-left .2s ease;
 }
-.plan-card:hover,
-.plan-card:focus-visible { background: rgba(71, 189, 222, .055); padding-left: 9px; }
-.plan-card strong { font: 500 18px/1.3 var(--site-display); letter-spacing: .03em; }
-.plan-card p { grid-column: 2; margin: 7px 0 0; color: #8f9fab; font-size: 13px; line-height: 1.55; }
-.plan-card i { grid-column: 3; grid-row: 1 / span 2; font-style: normal; font-size: 23px; color: var(--site-cyan); }
+.plan-copy { min-width: 0; }
+.plan-card strong { display: block; font: 500 18px/1.3 var(--site-display); letter-spacing: .03em; }
+.plan-card p { margin: 7px 0 0; color: #8f9fab; font-size: 13px; line-height: 1.55; }
 
 .contact-links { display: flex; align-items: baseline; gap: 32px; border-top: 1px solid rgba(208, 229, 241, .34); border-bottom: 1px solid rgba(208, 229, 241, .2); padding: 25px 0; }
 .contact-links a { color: #f1f9fa; font: 500 clamp(21px, 2.4vw, 38px)/1.2 var(--site-display); letter-spacing: -.02em; text-decoration: none; overflow-wrap: anywhere; }
@@ -635,11 +630,9 @@ body[data-view="art"] .site-shell {
   .landing-kicker span:last-child { display: none; }
   .globe-caption { max-width: 280px; }
   .landing-bottomline span:last-child { display: none; }
-  .plan-card { grid-template-columns: minmax(0, 1fr) 20px; gap: 7px; }
+  .plan-card { grid-template-columns: minmax(0, 1fr); gap: 7px; }
   .plan-card > span { grid-column: 1; }
-  .plan-card strong { grid-column: 1; font-size: 17px; }
-  .plan-card p { grid-column: 1; }
-  .plan-card i { grid-column: 2; grid-row: 1 / span 3; }
+  .plan-card strong { font-size: 17px; }
   .contact-links { display: block; }
   .contact-links a { display: block; margin-top: 13px; font-size: 24px; }
 }

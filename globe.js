@@ -186,6 +186,24 @@ function onPointerUp(event) {
   }
 }
 
+// Camera gestures call the globe directly: synthetic pointer events cannot
+// establish the browser's native pointer capture used by a mouse drag.
+function canGesture() {
+  return !!renderer && !!spin && !transition && !document.hidden && document.body.dataset.view === 'landing' && !document.querySelector('dialog[open]');
+}
+function gestureOrbit(dx,dy) {
+  if (!canGesture() || !Number.isFinite(dx) || !Number.isFinite(dy)) return false;
+  yaw += THREE.MathUtils.clamp(dx,-.08,.08) * innerWidth * .005;
+  pitch = THREE.MathUtils.clamp(pitch + THREE.MathUtils.clamp(dy,-.08,.08) * innerHeight * .0035,-1.17,1.17);
+  lastInteraction = performance.now();
+  return true;
+}
+function gestureClick() {
+  if (!canGesture()) return false;
+  yaw = shanghaiYaw; pitch = latitude; lastInteraction = performance.now();
+  return true;
+}
+
 async function show() {
   if (!frame || !canvas) return;
   if (renderer || fallback) {
@@ -345,5 +363,5 @@ function destroy() {
   if (marker) marker.style.opacity = '1';
 }
 
-window.SH2050_GLOBE = { show, enter, destroy };
+window.SH2050_GLOBE = { show, enter, destroy, gestureOrbit, gestureClick };
 if (document.body.dataset.view === 'landing') show();

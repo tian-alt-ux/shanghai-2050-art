@@ -1,0 +1,483 @@
+{
+  "meta": {
+    "version": "artwork-landmarks-20261102-approved-forms",
+    "checkedOn": "2026-11-02",
+    "count": 17,
+    "positionPolicy": "The 16 user points are retained as supplied, with unverified CRS. Oriental Pearl uses cached WGS84 OSM outline centroid. Existing-place identity does not certify a source-model mesh match or future operational state.",
+    "sourceCache": "../data/shanghai-osm.json, OSM timestamp 2026-09-23",
+    "licence": "OSM geometry © OpenStreetMap contributors / ODbL; public factual references linked per site.",
+    "landmarksNotAllTransmitters": "Cultural and public sites may be depicted as information-service endpoints, not automatically radio towers or telecom exchanges.",
+    "approvedConcepts": [
+      "lane-renewal",
+      "indoor-botanic",
+      "dishui-lake"
+    ],
+    "modelPolicy": "Existing recognisable silhouettes plus three user-approved authored 2050 concepts; source photos guide architecture, never surveyed dimensions."
+  },
+  "landmarks": [
+    {
+      "id": "bund",
+      "labelZh": "外滩",
+      "labelEn": "The Bund",
+      "lat": 31.23534,
+      "lon": 121.48763,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "area",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/gwk/search/content/cf46474f-4259-4087-ada5-105e2ec94971"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -820.425,
+        -606.707
+      ],
+      "formKind": "customs-clock-hsbc-dome-waterfront-cluster",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.shanghai.gov.cn/citywalk/20260625/9dfb6f86b9664e018607b5cc9ec9a53c.html"
+      ]
+    },
+    {
+      "id": "jing-an-temple",
+      "labelZh": "静安寺",
+      "labelEn": "Jing’an Temple",
+      "lat": 31.22522,
+      "lon": 121.44079,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "building",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.jingan.gov.cn/jagl/006004/006004003/jaglmoreinfo.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -6034.63,
+        -1924.174
+      ],
+      "formKind": "vajrasana-five-stupas-and-double-eaved-courtyard",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://jp.xinhuanet.com/20251224/ebc098f639e44e6ebc764a8ddfcef8e2/c.html"
+      ]
+    },
+    {
+      "id": "lane-renewal",
+      "labelZh": "弄堂改造",
+      "labelEn": "Laneway renewal scenario",
+      "lat": 31.11144,
+      "lon": 121.38046,
+      "status": "user-scenario",
+      "kind": "user-scenario",
+      "shapeKind": "scenario-area",
+      "noteZh": "用户确认的2050弄堂更新设想：连排街墙、贯通主弄、店面、露台与轻步桥；不是某一已公布改造工程的测绘复原。沿用用户给定艺术锚点。",
+      "noteEn": "User-approved 2050 laneway renewal concept with continuous street fronts, an open lane, shops, terraces and footbridges; not a survey of an announced redevelopment.",
+      "officialSources": [],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        -12750.534,
+        -16726.872
+      ],
+      "formKind": "future-laneway-courtyards-and-footbridges",
+      "formStatus": "authored-2050-concept",
+      "formSources": [
+        "https://www.ihchina.cn/art/detail/id/20377.html"
+      ],
+      "architectureStatus": "user-approved-2050-concept",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "id": "grand-opera",
+      "labelZh": "上海大歌剧院",
+      "labelEn": "Shanghai Grand Opera House",
+      "lat": 31.18061,
+      "lon": 121.46638,
+      "status": "opened-2026",
+      "kind": "opened-2026",
+      "shapeKind": "building",
+      "noteZh": "2026年6月竣工、2026-10-17正式启幕；艺术节官网地址浦东咏展路1号。不能再当2050才有的未建项目。给定坐标位置未另行测绘核验。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Completed in June 2026 and officially opened on 17 October 2026. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/nw4411/20261018/3d90066a76ff437292e6cd0cc1c790a0.html",
+        "https://www.artsbird.com/csiaf/a28b544a-c521-4f43-a94c-c25d26560fa3"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        -3185.964,
+        -7730.023
+      ],
+      "formKind": "continuous-fan-roof-and-spiral-public-stair",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.snohetta.com/projects/shanghai-grand-opera-house",
+        "https://www.sbp.de/en/project/shanghai-grand-opera-house/"
+      ]
+    },
+    {
+      "id": "thousand-trees",
+      "labelZh": "天安千树",
+      "labelEn": "Tian An 1000 Trees",
+      "lat": 31.25087,
+      "lon": 121.44089,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "complex",
+      "noteZh": "一期2021年底已开业；2026-06官方报道二期仍装修，预计2027年底开业，计划不是建成事实。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Phase 1 has operated since late 2021; the announced 2027 opening of phase 2 remains a plan. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/nw4411/20250526/161890cb6c4c47898ebdc0037e800878.html",
+        "https://shpt.gov.cn/csjd-jiedaozhen/sqdt-csjd/20260625/970972.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -6023.498,
+        1415.332
+      ],
+      "formKind": "asymmetric-connected-terraces-and-planter-columns",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://heatherwick.com/projects/public-space/1000trees/"
+      ]
+    },
+    {
+      "id": "west-bund-dream-center",
+      "labelZh": "西岸梦中心",
+      "labelEn": "West Bund Dream Center",
+      "lat": 31.16234,
+      "lon": 121.46159,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "complex",
+      "noteZh": "2024年9月已开业，2026不是未建项目；为片区型滨水商业文化场所。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "An existing waterfront cultural-commercial complex, opened in September 2024. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/nw4411/20260216/ab132d7866e34a618c386620e6d72d59.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        -3719.184,
+        -10107.015
+      ],
+      "formKind": "industrial-silo-cluster-and-public-roof-deck",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.xuhui.gov.cn/gzfw_tpdt/20250506/556391.html"
+      ]
+    },
+    {
+      "id": "indoor-botanic",
+      "labelZh": "室内植物园",
+      "labelEn": "Indoor botanic garden scenario",
+      "lat": 31.36601,
+      "lon": 121.35132,
+      "status": "user-scenario",
+      "kind": "user-scenario",
+      "shapeKind": "scenario-area",
+      "noteZh": "用户确认的2050生态中庭设想：中央树与生态山岛、多层环廊和透明外壳；不对应已核实的现实温室建设工程。沿用用户给定艺术锚点。",
+      "noteEn": "User-approved 2050 ecological atrium, with a central tree, ecological island, ring walks and a transparent enclosure. This is an authored future place, not a certified existing greenhouse project.",
+      "officialSources": [],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        -15994.384,
+        16417.2
+      ],
+      "relatedReferenceSources": [
+        "https://www.gzw.sh.gov.cn/shgzw_zxzx_gqdt/20260211/39627098666448c2932c03c4ee74f0b6.html"
+      ],
+      "formKind": "future-atrium-ringwalks-and-ecological-tree",
+      "formStatus": "authored-2050-concept",
+      "formSources": [
+        "https://www.dmaa.at/work/expo-cultural-park-greenhouse-garden-shanghai"
+      ],
+      "architectureStatus": "user-approved-2050-concept",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "id": "people-square",
+      "labelZh": "人民广场",
+      "labelEn": "People’s Square",
+      "lat": 31.2318,
+      "lon": 121.471,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "public-space",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/gwk/search/content/cf46474f-4259-4087-ada5-105e2ec94971"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -2671.668,
+        -1067.576
+      ],
+      "formKind": "open-civic-square-museum-and-theatre",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://english.shanghai.gov.cn/en-ScenicSpots/20231218/6a92c131565646c59bf9db015ca82ed2.html"
+      ]
+    },
+    {
+      "id": "suzhou-creek",
+      "labelZh": "苏州河",
+      "labelEn": "Suzhou Creek",
+      "lat": 31.24218,
+      "lon": 121.46649,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "river",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/gwk/search/content/cf46474f-4259-4087-ada5-105e2ec94971"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -3173.719,
+        283.835
+      ],
+      "formKind": "sihang-warehouse-river-bank-and-truss-walkway",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.ccphistory.org.cn/shds/shhm/content/f14dea94-2ca2-4fb3-ae1b-ff954d6d82aa.html"
+      ]
+    },
+    {
+      "id": "shanghai-tower",
+      "labelZh": "上海中心",
+      "labelEn": "Shanghai Tower",
+      "lat": 31.23564,
+      "lon": 121.50125,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "building",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.pudong.gov.cn/zwgk/14470.gkml_zhzw_ghjh/2026/41/350996/d9310ad7f81945cb8bc2c8c899a29cfb.pdf"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        695.747,
+        -567.65
+      ],
+      "formKind": "rounded-triangle-twist-and-asymmetric-crown",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.gensler.com/projects/shanghai-tower",
+        "https://global.ctbuh.org/resources/papers/download/1006-the-parametric-design-of-shanghai-towers-form-and-facade.pdf"
+      ]
+    },
+    {
+      "id": "yuyuan",
+      "labelZh": "豫园",
+      "labelEn": "Yuyuan Garden",
+      "lat": 31.22893,
+      "lon": 121.48798,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "garden",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.yugarden.com.cn/Page/WxyGarden/notice.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -781.463,
+        -1441.206
+      ],
+      "formKind": "huxinting-double-eaves-zigzag-bridge-and-open-pond",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://whlyj.sh.gov.cn/gqfc/20250711/07b690c043ea4bfa92473ca80aa306fd.html"
+      ]
+    },
+    {
+      "id": "wukang-road",
+      "labelZh": "武康路",
+      "labelEn": "Wukang Road",
+      "lat": 31.20626,
+      "lon": 121.43373,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "road",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/citywalk/20260625/3492b1b945c146fc96c4585d7b04f00d.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -6820.545,
+        -4392.092
+      ],
+      "formKind": "wukang-mansion-long-wedge-rounded-bow-and-arcades",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://whlyj.sh.gov.cn/gqfc/20210209/b3a2fe2bddc249069814c3084cd02f70.html"
+      ]
+    },
+    {
+      "id": "yangpu-riverside",
+      "labelZh": "杨浦滨江",
+      "labelEn": "Yangpu Riverside",
+      "lat": 31.2554,
+      "lon": 121.5331,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "area",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/gwk/search/content/cf46474f-4259-4087-ada5-105e2ec94971"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        4241.273,
+        2005.211
+      ],
+      "formKind": "industrial-riverbank-hall-gantry-and-wharf",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://whlyj.sh.gov.cn/gqfc/20220321/65f8e3ccf8584dfb933a644925f88e8b.html"
+      ]
+    },
+    {
+      "id": "hongqiao-station",
+      "labelZh": "虹桥站",
+      "labelEn": "Hongqiao Railway Station",
+      "lat": 31.19612,
+      "lon": 121.31611,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "transport",
+      "noteZh": "可作现有地点的2050保留/使用情景锚点；不把文化地点自动当作射频发射台。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing named landmark or area, used as an authored future activity/information-service anchor. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/wzjd/20260119/26616ae5a9ad4e8bbccc47c65126dbc8.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        -19913.944,
+        -5711.756
+      ],
+      "formKind": "wide-station-hall-platforms-and-parallel-tracks",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.shhqcbd.gov.cn/ywdt/mtjj/532520545529925.html"
+      ]
+    },
+    {
+      "id": "dishui-lake",
+      "labelZh": "滴水湖",
+      "labelEn": "Dishui Lake",
+      "lat": 30.89988,
+      "lon": 121.94337,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "future-public-building-at-lake-anchor",
+      "noteZh": "滴水湖为真实地点；银白建筑采用用户确认的2050滨湖公共建筑概念：开孔低展屋盖、球冠、玻璃基座与公共平台。沿用作品锚点展示，不认证现实湖岸地块或已公布建设计划。",
+      "noteEn": "Dishui Lake is an existing place; its silver architecture is the user-approved 2050 lakeside public-building concept, with an open low roof, oculi, a spherical pavilion and terraces. Its artwork anchor does not certify a real shoreline parcel or approved development.",
+      "officialSources": [
+        "https://swj.sh.gov.cn/swj-yxdx/20260119/4e22008fe9e04cd9a56f85357f9081c8.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": false,
+      "localProjectedXY": [
+        49912.32,
+        -44203.623
+      ],
+      "formKind": "future-lakefront-public-roof-and-oculi",
+      "formStatus": "authored-2050-concept",
+      "formSources": [],
+      "architectureStatus": "user-approved-2050-concept",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "id": "cpc-first-congress",
+      "labelZh": "中共一大旧址",
+      "labelEn": "CPC First Congress Site",
+      "lat": 31.22206,
+      "lon": 121.47069,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "heritage-building",
+      "noteZh": "既有历史会址；与2021开放的新馆属于纪念馆整体中的不同空间，不能把新馆当旧址同一建筑。 定位沿用用户给定经纬度，未声明坐标系；目前按WGS84进行艺术场景配准。",
+      "noteEn": "Existing historic congress site; distinguish it from the newer museum building. Position follows user-provided coordinates; CRS was not declared and WGS84 is assumed for artwork placement, not survey certification.",
+      "officialSources": [
+        "https://www.shanghai.gov.cn/hsly/20260625/10d0e931417d4614b0d8bbbbd03495c1.html"
+      ],
+      "coordinateEvidence": "USER",
+      "coordinateSystem": "WGS84-assumed-unverified",
+      "insidePreviousContext": true,
+      "localProjectedXY": [
+        -2706.177,
+        -2335.528
+      ],
+      "formKind": "continuous-two-storey-shikumen-streetwall-and-four-portals",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.zgyd1921.com/about.html"
+      ]
+    },
+    {
+      "id": "oriental-pearl",
+      "labelZh": "东方明珠",
+      "labelEn": "Oriental Pearl Tower",
+      "lat": 31.241893672347146,
+      "lon": 121.49526211756614,
+      "status": "existing",
+      "kind": "existing",
+      "shapeKind": "broadcast-tower",
+      "noteZh": "现存广播电视塔。位置取自本地OSM way 40778038轮廓的面积重心；避免沿用旧界面的GCJ坐标近似。它提供公开广播角色锚点，艺术传播线不等于真实射频路径、带宽或2050网络实测。",
+      "noteEn": "Existing broadcasting tower. Position is the area centroid of cached OSM way 40778038, avoiding the legacy GCJ-like anchor. Its public broadcast role anchors authored connections, not measured radio paths, bandwidth or a 2050 network feed.",
+      "officialSources": [
+        "https://lycx.whlyj.sh.gov.cn/c/scenicArea.view.ac?id=24801",
+        "https://whlyj.sh.gov.cn/5ajjq/20191008/0022-29706.html"
+      ],
+      "coordinateEvidence": "OSM-cache-way-40778038-derived-area-centroid",
+      "coordinateSystem": "WGS84",
+      "insidePreviousContext": true,
+      "formKind": "three-spheres-and-tripod",
+      "formStatus": "authored-existing-place-interpretation",
+      "formSources": [
+        "https://www.opg.cn/cn/index.html",
+        "https://english.shanghai.gov.cn/en-ScenicSpots/20231205/19a5f5184eca45728fd57a4d4c8efc61.html"
+      ]
+    }
+  ]
+}

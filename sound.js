@@ -1,36 +1,39 @@
 // Reference: claudiuangheloni.com/audio.js and its public space-01.mp3.
 // One sound controller spans the globe, menu and artwork; it starts on a real gesture.
+import {createWeatherAudio} from './week/weather-audio.mjs';
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 const preferenceKey = 'sh2050-sound-enabled';
 let enabled = true;
 try { enabled = localStorage.getItem(preferenceKey) !== 'false'; } catch {}
 let language = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
-let unlocked = false;
+let unlocked = false, mediaFocus = false;
 let status = enabled ? 'waiting' : 'muted';
 let context, fxBus, fxMaster, noiseBuffer, soundtrack, soundtrackGain;
+let weatherFoley,lastWeather={active:false,playing:false,layerOn:false,rainMm:0};
 let requestId = 0, pauseTimer, hoverUntil = 0;
 let view = document.body.dataset.view || 'landing';
 
 const copy = {
-  en: {on:'SOUND ON',off:'SOUND OFF',error:'SOUND UNAVAILABLE',enable:'Enable music and interface sounds',disable:'Mute music and interface sounds',waiting:'Music starts with your first interaction'},
-  zh: {on:'声音开',off:'声音关',error:'声音不可用',enable:'开启背景音乐与界面音效',disable:'关闭背景音乐与界面音效',waiting:'首次操作后播放背景音乐'}
+  en: {on:'SOUND ON',off:'SOUND OFF',media:'VIDEO AUDIO',mediaHint:'Video audio only; site sounds resume after playback',error:'SOUND UNAVAILABLE',enable:'Enable music, interface and weather sounds',disable:'Mute music, interface and weather sounds',waiting:'Music starts with your first interaction'},
+  zh: {on:'声音开',off:'声音关',media:'视频声音',mediaHint:'视频播放中，网页背景音效暂时静音',error:'声音不可用',enable:'开启音乐、界面与天气音效',disable:'关闭音乐、界面与天气音效',waiting:'首次操作后播放背景音乐'}
 };
 
 function refresh() {
   const text = copy[language];
   document.querySelectorAll('[data-sound-toggle], #sound').forEach(button => {
-    const label = status === 'error' ? text.error : enabled ? text.on : text.off;
+    const label = mediaFocus ? text.media : status === 'error' ? text.error : enabled ? text.on : text.off;
     const inner = button.querySelector('.sound-label');
     if (inner) inner.textContent = label;
     else button.textContent = label;
-    const title = status === 'error' ? text.error : enabled ? (status === 'waiting' ? text.waiting : text.disable) : text.enable;
+    const title = mediaFocus ? text.mediaHint : status === 'error' ? text.error : enabled ? (status === 'waiting' ? text.waiting : text.disable) : text.enable;
     button.setAttribute('aria-pressed', String(enabled));
     button.setAttribute('aria-label', title);
     button.title = title;
-    button.dataset.soundState = status;
+    button.dataset.soundState = mediaFocus ? 'video' : status;
   });
   document.body.dataset.sound = status;
-  window.dispatchEvent(new CustomEvent('sh2050:sound-state', {detail:{enabled,status,playing:!!soundtrack && !soundtrack.paused && status === 'playing'}}));
+  document.body.dataset.mediaAudio = mediaFocus ? 'video' : 'site';
+  window.dispatchEvent(new CustomEvent('sh2050:sound-state', {detail:{enabled,status,mediaFocus,playing:!mediaFocus && !!soundtrack && !soundtrack.paused && status === 'playing'}}));
 }
 
 function makeContext() {
@@ -39,10 +42,11 @@ function makeContext() {
   fxMaster = context.createGain();
   fxBus = context.createGain();
   // The reference mixes UI tones at 0.54 × 0.62.
-  fxMaster.gain.value = enabled ? .54 : 0;
+  fxMaster.gain.value = enabled && !mediaFocus ? .54 : 0;
   fxBus.gain.value = .62;
   fxBus.connect(fxMaster);
   fxMaster.connect(context.destination);
+  weatherFoley=createWeatherAudio(context,fxMaster);
   noiseBuffer = context.createBuffer(1, Math.round(context.sampleRate * 2), context.sampleRate);
   const data = noiseBuffer.getChannelData(0);
   for (let i=0;i<data.length;i++) data[i] = (Math.random()*2-1)*.18;
@@ -55,6 +59,7 @@ function makeSoundtrack() {
   soundtrack.preload = 'auto';
   soundtrack.playsInline = true;
   soundtrack.volume = 1;
+  soundtrack.muted = mediaFocus;
   soundtrack.id = 'site-soundtrack';
   soundtrack.hidden = true;
   soundtrack.setAttribute('aria-hidden','true');
@@ -79,7 +84,7 @@ function ramp(gain, target, seconds=.6) {
 }
 
 async function play() {
-  if (!enabled || !unlocked || document.hidden) return;
+  if (!enabled || !unlocked || document.hidden || mediaFocus) return;
   const id = ++requestId;
   clearTimeout(pauseTimer);
   try {
@@ -89,12 +94,13 @@ async function play() {
     const resume = context?.resume();
     const mediaPlay = soundtrack.play();
     await Promise.all([resume,mediaPlay]);
-    if (id !== requestId || !enabled || document.hidden) return;
+    if (id !== requestId || !enabled || document.hidden || mediaFocus) return;
     status = 'playing';
     ramp(fxMaster?.gain,.54,.06);
     if (soundtrackGain) ramp(soundtrackGain.gain,trackLevel(),.9);
     else soundtrack.volume = trackLevel();
     refresh();
+    updateWeather(lastWeather);
   } catch (error) {
     if (id !== requestId) return;
     status = error?.name === 'NotAllowedError' ? 'waiting' : 'error';
@@ -106,6 +112,7 @@ function quiet(immediate=false) {
   ++requestId;
   clearTimeout(pauseTimer);
   ramp(fxMaster?.gain,0,.07);
+  weatherFoley?.update({active:false});
   ramp(soundtrackGain?.gain,0,immediate ? .01 : .24);
   if (!soundtrackGain && soundtrack) soundtrack.volume = 0;
   const pause = () => {
@@ -128,12 +135,55 @@ function setEnabled(next) {
   return enabled;
 }
 
+/** Temporary video focus never changes the saved site-sound preference.
+ * The background track keeps its position behind a hard mute, while the
+ * masters cancel scheduled fades so a late play()/navigation cannot leak.
+ */
+function setMediaFocus(next) {
+  next=!!next;
+  if (next===mediaFocus) return mediaFocus;
+  mediaFocus=next;
+  ++requestId;
+  clearTimeout(pauseTimer);
+  if (mediaFocus) {
+    if (soundtrack) soundtrack.muted=true;
+    ramp(fxMaster?.gain,0,0);
+    ramp(soundtrackGain?.gain,0,0);
+    if (!soundtrackGain && soundtrack) soundtrack.volume=0;
+    status='media';
+    updateWeather(lastWeather);
+    refresh();
+  } else {
+    if (soundtrack) soundtrack.muted=false;
+    if (enabled && unlocked && !document.hidden) {
+      if (soundtrack && !soundtrack.paused && (!context || context.state==='running')) {
+        status='playing';
+        ramp(fxMaster?.gain,.54,.16);
+        if (soundtrackGain) ramp(soundtrackGain.gain,trackLevel(),.28);
+        else soundtrack.volume=trackLevel();
+        updateWeather(lastWeather);
+        refresh();
+      } else {
+        status='paused';
+        refresh();
+        void play();
+      }
+    } else {
+      if (!enabled) soundtrack?.pause();
+      status=enabled?(unlocked?'paused':'waiting'):'muted';
+      updateWeather(lastWeather);
+      refresh();
+    }
+  }
+  return mediaFocus;
+}
+
 function prime(event) {
   if (!event.isTrusted || (event.type === 'keydown' && event.repeat)) return;
   unlocked = true;
   // A sound-toggle click must toggle once, without first starting the track.
   if (event.target.closest?.('[data-sound-toggle], #sound')) return;
-  if (enabled) {
+  if (enabled && !mediaFocus) {
     makeContext();
     if (context?.state !== 'running') context?.resume().catch(()=>{});
     if (!soundtrack || soundtrack.paused || status !== 'playing') void play();
@@ -170,7 +220,7 @@ function noise(volume) {
 }
 
 function clickSound() {
-  if (!enabled || !unlocked || document.hidden || !context) return;
+  if (!enabled || !unlocked || document.hidden || !context || mediaFocus) return;
   ramp(fxMaster.gain,.54,.001);
   tone(4680,'triangle',.012,.04,.0007,.01);
   tone(9280,'square',.009,.03,.0005,.009);
@@ -179,7 +229,7 @@ function clickSound() {
 }
 
 function hoverSound() {
-  if (!enabled || !unlocked || document.hidden || !context || performance.now()<hoverUntil) return;
+  if (!enabled || !unlocked || document.hidden || !context || mediaFocus || performance.now()<hoverUntil) return;
   hoverUntil=performance.now()+100;
   tone(7040,'square',.008,.05,.0005,.008);
   tone(9880,'sine',.006,.034,.0005,.007,22);
@@ -214,16 +264,29 @@ document.addEventListener('pointerover',event=>{
 window.addEventListener('sh2050:language',event=>{language=event.detail?.lang==='zh'?'zh':'en';refresh();});
 window.addEventListener('sh2050:navigation',event=>{
   view=event.detail?.view||document.body.dataset.view||'landing';
-  if (enabled && soundtrack && !soundtrack.paused) ramp(soundtrackGain?.gain,trackLevel(),.55);
+  if (enabled && !mediaFocus && soundtrack && !soundtrack.paused) {
+    if (soundtrackGain) ramp(soundtrackGain.gain,trackLevel(),.55);
+    else soundtrack.volume=trackLevel();
+  }
+  updateWeather(lastWeather);
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden)quiet(true);else if(enabled&&unlocked)void play();});
 window.addEventListener('pagehide',()=>quiet(true));
 window.addEventListener('pageshow',()=>{if(enabled&&unlocked&&!document.hidden)void play();});
 
+function updateWeather(frame={}){
+ lastWeather={...lastWeather,...frame};
+ const input={...lastWeather,enabled:enabled&&unlocked&&!mediaFocus&&context?.state==='running',active:lastWeather.active&&view==='artwork'&&!document.hidden};
+ weatherFoley?.update(input);
+ document.body.dataset.weatherAudio=input.enabled&&input.active&&input.playing&&input.layerOn?(input.rainMm>0?'rain':'dry'):'silent';
+ document.body.dataset.weatherThunder=String(weatherFoley?.getState().thunderCount??0);
+}
 window.SH2050_SOUND = Object.freeze({
   toggle:()=>setEnabled(!enabled),setEnabled,isEnabled:()=>enabled,
-  getState:()=>({enabled,status,unlocked,playing:!!soundtrack&&!soundtrack.paused,currentTime:soundtrack?.currentTime||0}),
+  getState:()=>({enabled,status,unlocked,mediaFocus,playing:!mediaFocus&&!!soundtrack&&!soundtrack.paused,currentTime:soundtrack?.currentTime||0,weather:weatherFoley?.getState()}),
+  updateWeather,setMediaFocus,
   refresh,playClick:clickSound,
   setLanguage:lang=>{language=lang==='zh'?'zh':'en';refresh();}
 });
 refresh();
+

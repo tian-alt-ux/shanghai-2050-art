@@ -1,0 +1,22 @@
+/* One compact media inset follows a selected landmark; the city stays visible. */
+#landmark-media{box-sizing:border-box;position:fixed;left:0;top:0;z-index:8;width:var(--landmark-media-width,280px);max-width:320px;margin:0;padding:0;color:#d8e8f0;background:#04101de8;border:1px solid #9acbd044;box-shadow:0 8px 24px #0005;contain:layout paint;will-change:transform;pointer-events:auto;text-align:left;font:11px/1.4 Consolas,'Microsoft YaHei',monospace;isolation:isolate}
+#landmark-media[hidden],#landmark-media [hidden],#landmark-media-connector[hidden]{display:none!important}
+#landmark-media::before{content:'';position:absolute;z-index:2;left:9px;top:0;width:28px;height:2px;background:#c8f2ff;opacity:.9;pointer-events:none}
+#landmark-media .landmark-media-head{box-sizing:border-box;height:28px;display:flex;align-items:center;gap:8px;padding:0 5px 0 10px;border-bottom:1px solid #a8d4ea2b;user-select:none}
+#landmark-media .landmark-media-head strong{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:400;letter-spacing:.04em;color:#d8e8f0;text-shadow:none}
+#landmark-media button{appearance:none;box-sizing:border-box;display:grid;place-items:center;margin:0;padding:0;border:0;border-radius:0;color:#d3e8f1;background:transparent;font:inherit;cursor:pointer;pointer-events:auto;text-shadow:none;touch-action:manipulation}
+#landmark-media .landmark-media-close{flex:0 0 26px;min-width:26px;height:26px;font:20px/1 Arial,sans-serif;color:#a9c6d5}
+#landmark-media .landmark-media-toggle{flex:0 0 26px;min-width:26px;height:26px;font:13px/1 Consolas,'Microsoft YaHei',monospace;color:#b9d5e2;letter-spacing:0}
+#landmark-media button:hover{color:#fff;background:#d0edf018}
+#landmark-media button:focus-visible{outline:1px solid #b7eaff;outline-offset:-3px;background:#d0edf018}
+#landmark-media .landmark-media-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#02070c}
+#landmark-media video,#landmark-media img{position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;object-fit:contain;border:0;user-select:none}
+#landmark-media video{background:#02070c}
+#landmark-media .landmark-media-replay{position:absolute;z-index:2;left:8px;bottom:8px;min-width:26px;min-height:26px;padding:4px 8px;color:#e5f3fa;background:#020b15b8;border:1px solid #b5d7e53d;font-size:10px;letter-spacing:.03em}
+#landmark-media .landmark-media-status{position:absolute;z-index:2;inset:auto 8px 8px;margin:0;font-size:10px;line-height:1.5;color:#c9dce7;pointer-events:none}
+#landmark-media-connector{position:fixed;inset:0;z-index:7;width:100%;height:100%;overflow:visible;pointer-events:none}
+#landmark-media-connector line,#landmark-media-connector path{fill:none;stroke:#b5e5f787;stroke-width:1;vector-effect:non-scaling-stroke}
+#landmark-media-connector circle{fill:#d9f2ff;opacity:.8}
+body:not([data-view='artwork']) #landmark-media,body:not([data-view='artwork']) #landmark-media-connector{display:none}
+@media(max-width:700px){#landmark-media{width:var(--landmark-media-width,200px);max-width:calc(100vw - 24px)}#landmark-media .landmark-media-head strong{font-size:10px}#landmark-media .landmark-media-replay{left:6px;bottom:6px}}
+@media(prefers-reduced-motion:reduce){#landmark-media{will-change:auto}}

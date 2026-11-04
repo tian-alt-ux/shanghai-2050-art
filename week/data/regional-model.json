@@ -1,0 +1,48 @@
+{
+  "source": "C:\\Users\\12618\\Desktop\\上海.blend",
+  "sourcePreserved": true,
+  "origin": [
+    13524761.533928772,
+    3663957.0930902106
+  ],
+  "coordinateSystem": "EPSG3857 relative to 121.495E31.24N; browser x=east*.02,y=height*.02,z=-north*.02",
+  "format": "little endian float32 xyz",
+  "records": [
+    {
+      "name": "buildings",
+      "file": "regional-buildings.bin",
+      "count": 1146784,
+      "method": "every 8th original primary-building mesh vertex",
+      "bounds": [
+        [
+          -1425.123291015625,
+          0.0,
+          -1612.90234375
+        ],
+        [
+          1085.193115234375,
+          15.239999771118164,
+          1417.790771484375
+        ]
+      ]
+    },
+    {
+      "name": "公路",
+      "file": "regional-roads.bin",
+      "count": 457306,
+      "method": "every 3th actual source edge; no inferred topology"
+    },
+    {
+      "name": "水系",
+      "file": "regional-water.bin",
+      "count": 608818,
+      "method": "every 2th actual source edge; no inferred topology"
+    }
+  ],
+  "seconds": 1.2190000000045984,
+  "limitations": [
+    "Regional simplified geometry only; source identities and completeness are not certified.",
+    "Regional roads are source geometry, not measured traffic or a routed OD network.",
+    "No fictional geometry is added for planned landmarks absent from the supplied model."
+  ]
+}

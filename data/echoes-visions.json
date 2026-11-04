@@ -1,0 +1,245 @@
+{
+  "version": 2,
+  "cards": [
+    {
+      "id": "seed-river-restored",
+      "titleEn": "River, Restored",
+      "titleZh": "亲近江水",
+      "textEn": "In 2050, I hope the Huangpu is clean and welcoming enough for everyone to pause at its edge. A quiet step by the water should belong to all of us.",
+      "textZh": "希望2050年的黄浦江更加清澈、亲近。每个人都能来到水边，在一段安静的台阶上停留，让江岸成为所有人的日常。",
+      "topic": "water",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-lane-life",
+      "titleEn": "Lane Life",
+      "titleZh": "弄堂日常",
+      "textEn": "I hope Shanghai in 2050 still has lived-in lanes: laundry at the window, a familiar neighbour and old brick warmed by morning light. Renewal can leave room for ordinary memories.",
+      "textZh": "希望2050年的上海仍有真实生活着的弄堂：窗外晾着衣服，转角能遇见熟悉的邻居，早晨的阳光落在旧砖上。更新也为日常记忆留一席之地。",
+      "topic": "memory",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-after-rain",
+      "titleEn": "After Rain",
+      "titleZh": "雨后呼吸",
+      "textEn": "By 2050, I imagine streets that can absorb the rain. Water can linger among reeds and gardens, while a walk home remains simple and safe.",
+      "textZh": "想象2050年的街道能温柔地接住雨水。水流暂留在芦苇与雨水花园里，雨后的回家路仍然轻松、安全。",
+      "topic": "climate",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-room-to-breathe",
+      "titleEn": "Room to Breathe",
+      "titleZh": "自由呼吸",
+      "textEn": "In Shanghai 2050, I want to look up and notice the clouds before the buildings. Cleaner air, a wider sky and a little more room to breathe.",
+      "textZh": "希望2050年的上海，抬头时能先看见云，再看见高楼。空气更清新，天空更开阔，每一次呼吸都多一点从容。",
+      "topic": "sky",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-last-ferry",
+      "titleEn": "Last Ferry",
+      "titleZh": "晚班渡轮",
+      "textEn": "I imagine a late ferry home in 2050: soft city lights through a rainy window, an affordable journey and time to watch the river rather than rush across it.",
+      "textZh": "想象2050年坐晚班渡轮回家。雨点模糊了窗外的灯光，旅程依然方便、负担得起，也让人有时间看看江水，不必总是匆忙赶路。",
+      "topic": "mobility",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-shared-shade",
+      "titleEn": "Shared Shade",
+      "titleZh": "树荫共享",
+      "textEn": "In 2050, every Shanghai neighbourhood should have a shady place to sit without buying anything. Cooler streets can begin with a tree and an ordinary bench.",
+      "textZh": "希望2050年每个社区都有不必消费就能坐下的树荫。让夏日的街道凉快一点，也许就从一棵树、一张普通长椅开始。",
+      "topic": "community",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-still-connected",
+      "titleEn": "Still Connected",
+      "titleZh": "依然相连",
+      "textEn": "I hope technology in Shanghai 2050 makes connection easier and quieter. Less interruption, more understanding, and the freedom to step away while still belonging.",
+      "textZh": "希望2050年的技术让连接更容易，也更安静。少一些打扰，多一些理解；即使暂时离开屏幕，也不会失去与他人的联系。",
+      "topic": "digital",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-a-slower-day",
+      "titleEn": "A Slower Day",
+      "titleZh": "慢一点生活",
+      "textEn": "My Shanghai 2050 has room for a slower day: a bicycle in the lane, a nearby errand and an afternoon that does not disappear into commuting.",
+      "textZh": "我的上海2050里，人可以慢一点生活。弄堂里停着自行车，日常所需就在附近，一个下午不再全部消失在通勤路上。",
+      "topic": "slowness",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-creek-morning",
+      "titleEn": "Creek Morning",
+      "titleZh": "苏河清晨",
+      "textEn": "I imagine an ordinary morning beside Suzhou Creek in 2050. Clean water, familiar old railings and a continuous walk shared by people of every age.",
+      "textZh": "想象2050年苏州河边一个平常的清晨。河水清洁，旧栏杆依然熟悉，不同年龄的人都能沿着连续开放的岸线散步。",
+      "topic": "water",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-wild-neighbours",
+      "titleEn": "Wild Neighbours",
+      "titleZh": "与万物为邻",
+      "textEn": "By 2050, I hope Shanghai leaves more room for birds and wetlands at the estuary. A future city can include lives that never appear in our daily schedules.",
+      "textZh": "希望2050年的上海在河口为鸟群和湿地留出更多空间。未来的城市，也应容纳那些从不出现在我们日程表里的生命。",
+      "topic": "nature",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-shared-table",
+      "titleEn": "Shared Table",
+      "titleZh": "同桌相聚",
+      "textEn": "In 2050, I hope we still find each other around a shared table. New neighbours and old friends can make a place feel like home, one ordinary meal at a time.",
+      "textZh": "希望2050年，我们依然愿意围坐在同一张桌边。新邻居、老朋友，让一个地方成为家的，也许就是一顿平常的饭。",
+      "topic": "community",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-love-remains",
+      "titleEn": "Love Remains",
+      "titleZh": "爱仍在此",
+      "textEn": "Whatever changes by 2050, I hope Shanghai still gives us time and places to meet someone we love. A quiet riverside evening is enough.",
+      "textZh": "无论2050年改变了多少，希望上海仍给我们时间和地方，去见想见的人。一个安静的江边傍晚，就已经足够。",
+      "topic": "love",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-open-library",
+      "titleEn": "Open Library",
+      "titleZh": "街角书房",
+      "textEn": "I imagine small, welcoming reading rooms within walking distance of every Shanghai home in 2050. A reused room, daylight and books can open a much larger world.",
+      "textZh": "想象2050年，每个上海人的步行范围里都有一间友好的小书房。利用旧房间，让自然光照进书页，也让更大的世界走进日常。",
+      "topic": "knowledge",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-night-again",
+      "titleEn": "Night Again",
+      "titleZh": "再见星空",
+      "textEn": "In Shanghai 2050, I hope we can see the stars from a quiet stretch of riverbank. A city can feel alive without lighting every surface all night.",
+      "textZh": "希望2050年，从上海一段安静的江岸也能看见星星。城市可以充满生命力，也可以让一些地方在夜晚真正安静、暗下来。",
+      "topic": "sky",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-step-by-step",
+      "titleEn": "Step by Step",
+      "titleZh": "自在出行",
+      "textEn": "My hope for 2050 is a Shanghai where a wheelchair, a pram or a slower pace never means taking the long way around. Accessibility should be part of the everyday route.",
+      "textZh": "希望2050年的上海，无论坐轮椅、推婴儿车，还是只是走得慢一些，都不必为此绕远。无障碍就是每个人平常走的那条路。",
+      "topic": "accessibility",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-growing-together",
+      "titleEn": "Growing Together",
+      "titleZh": "一起生长",
+      "textEn": "By 2050, I imagine small gardens on ordinary Shanghai rooftops. We grow a little food, learn from different generations and get to know the people next door.",
+      "textZh": "想象2050年，普通的上海屋顶上也有小菜园。种一点食物，向不同年龄的人学习，也重新认识住在身边的邻居。",
+      "topic": "community",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-less-rush",
+      "titleEn": "Less Rush",
+      "titleZh": "不必匆忙",
+      "textEn": "In Shanghai 2050, I hope a dependable bus and a pleasant walk are enough for most days. Better mobility can give people back their time rather than make everyone hurry faster.",
+      "textZh": "希望2050年的上海，一班可靠的公交和一段舒适的步行，就足够应付多数日常。更好的出行，是把时间还给人，而不是让所有人赶得更快。",
+      "topic": "mobility",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-our-old-walls",
+      "titleEn": "Our Old Walls",
+      "titleZh": "旧墙新生",
+      "textEn": "I hope Shanghai 2050 finds new uses for old industrial buildings without erasing their marks. The future can grow inside places that already hold our stories.",
+      "textZh": "希望2050年的上海，旧工业建筑拥有新用途，也保留岁月留下的痕迹。未来可以在那些已经装着我们故事的地方继续生长。",
+      "topic": "memory",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-small-wonders",
+      "titleEn": "Small Wonders",
+      "titleZh": "微小生机",
+      "textEn": "In 2050, I want a Shanghai where nature is welcome even in small places: moss after rain, a fern in a wall and a moment to notice them on the way home.",
+      "textZh": "希望2050年的上海，也欢迎自然出现在小小的角落：雨后的苔藓，墙缝里的蕨叶，以及回家路上有空注意到它们的我们。",
+      "topic": "nature",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-water-memory",
+      "titleEn": "Water Memory",
+      "titleZh": "水的记忆",
+      "textEn": "I imagine Shanghai 2050 learning to live with water and changing tides. The river remains a moving presence in daily life, not just a view behind a barrier.",
+      "textZh": "想象2050年的上海，学着与水和变化的潮汐共同生活。江水依然参与着我们的日常，而不只是围栏后的一片风景。",
+      "topic": "water",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-a-quiet-signal",
+      "titleEn": "A Quiet Signal",
+      "titleZh": "安静的讯息",
+      "textEn": "In Shanghai 2050, I hope useful technology can stay in the background. Enough information to help us, and enough quiet to hear our own thoughts.",
+      "textZh": "希望2050年的上海，有用的技术能安静地待在身后。信息足够帮助我们，也留下足够的安静，让人听见自己的想法。",
+      "topic": "digital",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-evening-air",
+      "titleEn": "Evening Air",
+      "titleZh": "傍晚的风",
+      "textEn": "My small wish for Shanghai 2050 is an unhurried walk after work. A river breeze, a changing sky and the feeling that the evening still belongs to us.",
+      "textZh": "对上海2050的一个小愿望：下班后还能从容地走一段路。感受江风，看天空慢慢变色，觉得这个傍晚依然属于自己。",
+      "topic": "slowness",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-under-the-trees",
+      "titleEn": "Under the Trees",
+      "titleZh": "树下漫步",
+      "textEn": "In 2050, I hope the things we need are a comfortable walk away. Shanghai's trees can connect our homes, schools and small daily destinations.",
+      "textZh": "希望2050年，日常所需就在舒适的步行范围内。让上海的树荫连接家、学校，以及生活里那些不起眼却重要的小目的地。",
+      "topic": "mobility",
+      "seed": true,
+      "count": 0
+    },
+    {
+      "id": "seed-room-for-all",
+      "titleEn": "Room for All",
+      "titleZh": "容纳每个人",
+      "textEn": "I hope Shanghai 2050 has shared places where different ages and backgrounds can simply be together. Everyone should feel that there is room for them in the city.",
+      "textZh": "希望2050年的上海，有让不同年龄、不同背景的人自在相处的公共空间。每个人都能感觉到，这座城市为自己留了位置。",
+      "topic": "community",
+      "seed": true,
+      "count": 0
+    }
+  ]
+}

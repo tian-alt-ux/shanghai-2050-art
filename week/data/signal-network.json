@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "schemaVersion": "metabolism-signal-1",
+    "evidenceKind": "ASSUMP+ART",
+    "coordinateSystem": "WGS84 approximate anchors / local EPSG:3857 east,north",
+    "sourceNote": "Authored semantic information relationships on the city model. These are not measured radio paths, optical fibres, telecom topology, bandwidth or social-media traffic.",
+    "units": {
+      "intensity": "relative-index",
+      "delayIndex": "relative-index",
+      "travelMinutes": "authored simulated notification travel time"
+    },
+    "positionCheck": "Approximate points checked against the sample water surface; landmark identity, building height and access boundaries still require independent alignment checks.",
+    "relayGain": 0.3,
+    "maxRelayHops": 1,
+    "limitations": [
+      "One-hop semantic relays are bounded influence indices, not a packet-conserving communications simulation.",
+      "Notification travel times and pulse phases are authored viewing parameters, not network latency measurements.",
+      "A conditionsAt callback is required for historically delayed event responses; otherwise inputs express the current symbolic condition only."
+    ]
+  },
+  "nodes": [
+    {
+      "id": "culture-pearl",
+      "labelZh": "东方明珠 · 文化广播象征",
+      "labelEn": "Oriental Pearl · Cultural broadcast",
+      "type": "culture",
+      "lon": 121.4998,
+      "lat": 31.2397,
+      "x": 534.333556,
+      "y": -39.059299,
+      "sourceKind": "ASSUMP+ART",
+      "locationKind": "approximate-landmark-anchor",
+      "role": "symbolic cultural broadcast, not all city information"
+    },
+    {
+      "id": "transport-west",
+      "labelZh": "模拟交通节点 · 西岸",
+      "labelEn": "Traffic scenario · West bank",
+      "type": "transport",
+      "lon": 121.48,
+      "lat": 31.24,
+      "x": -1669.792362,
+      "y": 0,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    },
+    {
+      "id": "transport-east",
+      "labelZh": "模拟交通节点 · 东岸",
+      "labelEn": "Traffic scenario · East bank",
+      "type": "transport",
+      "lon": 121.51,
+      "lat": 31.238,
+      "x": 1669.792362,
+      "y": -260.392982,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    },
+    {
+      "id": "community-west",
+      "labelZh": "模拟社区节点 · 西南",
+      "labelEn": "Community scenario · Southwest",
+      "type": "community",
+      "lon": 121.482,
+      "lat": 31.23,
+      "x": -1447.15338,
+      "y": -1301.909786,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    },
+    {
+      "id": "community-east",
+      "labelZh": "模拟文化节点 · 东南",
+      "labelEn": "Community scenario · Southeast",
+      "type": "community",
+      "lon": 121.507,
+      "lat": 31.23,
+      "x": 1335.83389,
+      "y": -1301.909786,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    },
+    {
+      "id": "community-north",
+      "labelZh": "模拟社区节点 · 北侧",
+      "labelEn": "Community scenario · North",
+      "type": "community",
+      "lon": 121.488,
+      "lat": 31.25,
+      "x": -779.236436,
+      "y": 1302.047623,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    },
+    {
+      "id": "community-river-east",
+      "labelZh": "模拟社区节点 · 东侧",
+      "labelEn": "Community scenario · East",
+      "type": "community",
+      "lon": 121.513,
+      "lat": 31.234,
+      "x": 2003.750834,
+      "y": -781.162407,
+      "sourceKind": "ASSUMP",
+      "locationKind": "authored land anchor"
+    }
+  ],
+  "links": [
+    {
+      "id": "sig-01",
+      "source": "culture-pearl",
+      "target": "transport-west",
+      "kind": "broadcast",
+      "weight": 0.7,
+      "travelMinutes": 9,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-02",
+      "source": "culture-pearl",
+      "target": "transport-east",
+      "kind": "broadcast",
+      "weight": 0.74,
+      "travelMinutes": 7,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-03",
+      "source": "culture-pearl",
+      "target": "community-north",
+      "kind": "broadcast",
+      "weight": 0.6,
+      "travelMinutes": 12,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-04",
+      "source": "culture-pearl",
+      "target": "community-west",
+      "kind": "broadcast",
+      "weight": 0.58,
+      "travelMinutes": 14,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-05",
+      "source": "transport-west",
+      "target": "community-west",
+      "kind": "traffic-notice",
+      "weight": 0.9,
+      "travelMinutes": 6,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-06",
+      "source": "transport-west",
+      "target": "community-north",
+      "kind": "traffic-notice",
+      "weight": 0.76,
+      "travelMinutes": 10,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-07",
+      "source": "transport-east",
+      "target": "community-east",
+      "kind": "traffic-notice",
+      "weight": 0.86,
+      "travelMinutes": 7,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-08",
+      "source": "transport-east",
+      "target": "community-river-east",
+      "kind": "traffic-notice",
+      "weight": 0.82,
+      "travelMinutes": 5,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-09",
+      "source": "community-west",
+      "target": "community-north",
+      "kind": "community",
+      "weight": 0.6,
+      "travelMinutes": 15,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-10",
+      "source": "community-north",
+      "target": "community-west",
+      "kind": "community",
+      "weight": 0.54,
+      "travelMinutes": 17,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-11",
+      "source": "community-east",
+      "target": "community-river-east",
+      "kind": "community",
+      "weight": 0.58,
+      "travelMinutes": 11,
+      "sourceKind": "ASSUMP+ART"
+    },
+    {
+      "id": "sig-12",
+      "source": "community-river-east",
+      "target": "community-east",
+      "kind": "community",
+      "weight": 0.52,
+      "travelMinutes": 13,
+      "sourceKind": "ASSUMP+ART"
+    }
+  ]
+}
