@@ -118,7 +118,7 @@ export function createGestureInput({isActive=()=>false,isFlying=()=>false,onOrbi
   if(disposed)return null;
   if(!cameraAvailable){details.open=Boolean(value);statusKey='local';clearVisual();label();return null;}
   if(publicCameraAvailable){
-   if(!value&&!publicConnectionRequested){mode='mouse';statusKey='off';details.open=false;label();return null;}
+   if(!value&&!publicConnectionRequested&&!unconfirmedStop){mode='mouse';statusKey='off';details.open=false;label();return null;}
    publicConnectionRequested=true;details.open=Boolean(value);
   }
   const result=await requests.select(value?'gesture':'mouse');
