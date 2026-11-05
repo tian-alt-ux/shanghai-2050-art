@@ -83,3 +83,5 @@ body[data-week].place-focused .headlines{display:block}
 @media(max-width:700px){body[data-week].place-focused .week-story{max-height:225px;margin:10px 3px}body[data-week].place-focused #words p{font-size:11px;line-height:1.7}body[data-week].place-focused .headlines{margin-top:12px}}
 @media(max-width:700px){body[data-week] .identity{gap:8px}body[data-week] .identity .week-edition{font-size:8px;padding-left:8px;letter-spacing:1px}body[data-week] .identity .week-edition b{font-size:9px;letter-spacing:3px}body[data-week] .wordmark{font-size:18px}body[data-week] .city-mark{font-size:31px}}
 @media(max-width:700px){#place-select{top:46px;right:0;width:140px}body[data-week] .data-panel{background:transparent!important}}
+/* The week layout already chooses labels that fit around the controls on phones. */
+@media(max-width:650px){body[data-week] .landmark:not([hidden]){display:block}body[data-week] .landmark[hidden]{display:none}}

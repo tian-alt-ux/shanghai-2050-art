@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#030615"><meta name="artwork-id" content="shanghai-2050"><meta name="artwork-build" content="20261102-bund-shore"><title>SHANGHAI 2050 · TIDE / PULSE / SIGNAL</title>
+  <meta name="theme-color" content="#030615"><meta name="artwork-id" content="shanghai-2050"><meta name="artwork-build" content="20261105-stability"><title>SHANGHAI 2050 · TIDE / PULSE / SIGNAL</title>
   <meta name="description" content="Shanghai 2050: an interactive, speculative portrait of the city's environmental rhythms, human life and digital signals.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23030615'/%3E%3Cpath d='M4 23L11 9L16 20L23 5L28 23' fill='none' stroke='%235de6ff' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./style.css">
@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="./echoes.css">
   <link rel="stylesheet" href="./echoes-gallery.css">
   <link rel="stylesheet" href="./echoes-cards.css">
-  <link rel="stylesheet" href="./week/week.css">
-  <link rel="stylesheet" href="./week/landmark-media.css">
+  <link rel="stylesheet" href="./week/week.css?v=20261105-stability">
+  <link rel="stylesheet" href="./week/landmark-media.css?v=20261105-stability">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head>
 <body data-mode="culture" data-view="landing">
@@ -28,7 +28,7 @@
       <div class="landing-copy"><aside class="echo-preview" aria-label="Future Echoes preview">
       <button class="echo-preview-heading" type="button" data-echo-open aria-haspopup="dialog" aria-controls="echo-dialog"><span>FUTURE ECHOES</span><span class="echo-preview-caption" data-echo-copy="previewCaption">A SHARED IMAGINATION</span><span aria-hidden="true">↗</span></button>
       <div class="echo-preview-cards" id="echo-preview-cards"></div>
-    </aside><p class="landing-kicker"><span class="kicker-line"></span><span data-i18n="landingKicker">A WEEK OF URBAN METABOLISM</span><span>001 / 2050</span></p><h1>SHANGHAI<span>2050</span></h1><p class="landing-subtitle" data-i18n="landingSubtitle">Tide, pulse and signal share one Shanghai, one week.</p><div class="landing-themes" aria-label="The three layers"><span>01 <b>TIDE</b></span><span>02 <b>PULSE</b></span><span>03 <b>SIGNAL</b></span></div><button type="button" id="explore-button" class="explore-button"><span data-i18n="explore">EXPLORE MY WORK</span><span class="arrow" aria-hidden="true">↗</span></button><p id="landing-load" class="landing-load" role="status" data-i18n="preparing">PREPARING THE CITY EXPERIENCE…</p></div>
+    </aside><p class="landing-kicker"><span class="kicker-line"></span><span data-i18n="landingKicker">A WEEK OF URBAN METABOLISM</span><span>001 / 2050</span></p><h1>SHANGHAI<span>2050</span></h1><p class="landing-subtitle" data-i18n="landingSubtitle">Tide, pulse and signal share one Shanghai, one week.</p><div class="landing-themes" aria-label="The three layers"><span>01 <b>TIDE</b></span><span>02 <b>PULSE</b></span><span>03 <b>SIGNAL</b></span></div><button type="button" id="explore-button" class="explore-button"><span data-i18n="explore">EXPLORE MY WORK</span><span class="arrow" aria-hidden="true">↗</span></button><p id="landing-load" class="landing-load" role="status">PREPARING THE CITY EXPERIENCE…</p><button type="button" id="landing-retry" class="landing-retry" hidden onclick="location.reload()">RETRY LOADING</button></div>
     </div>
     <div class="landing-bottomline"><span data-i18n="artistLine">AN INTERACTIVE ARTWORK BY TIAN YZHE</span><span data-i18n="scenarioLine">HISTORICAL REFERENCE × A 2050 ARTISTIC VISION</span><span data-i18n="landingActions">DRAG TO ROTATE · CLICK TO ENTER</span></div>
   </section>
@@ -92,10 +92,72 @@
   </dialog>
   <dialog id="about-dialog"><button class="dialog-close" aria-label="关闭说明">CLOSE ×</button><p class="eyebrow">CONVERGENCE SH / SHANGHAI 2050</p><h1>上海，一周的城市代谢。</h1><p>一场雨如何牵动街区的往返，又如何进入城市的信息网络？《上海2050》把环境、人的活动与服务交换放在同一座三维上海中，让观看者沿着一周的时间，走近一座不断回应变化的城市。</p><div class="about-grid"><div><h2>三种彼此牵动的节律</h2><p><b>潮 TIDE</b>　风与湿度形成线海，雨丝随参考周天气落下。<br><b>脉 PULSE</b>　道路热力与活动光点展现往返、聚集与消散。<br><b>讯 SIGNAL</b>　冰紫蓝服务与橙金公众内容，在不同片区之间汇聚、等待和传递。</p></div><div><h2>走进同一座上海</h2><p>拖动旋转，滚轮围绕鼠标指向平滑缩放，右键拖动平移。缩到最远会回到以市中心为中心的总览。点击左侧按钮或按1 / 2 / 3，独立开关、叠加三层。</p><p>点击地标名称或选择定位菜单，拉近镜头、阅读地点故事，并在建筑旁观看短片或图片。短片可暂停、重播或关闭；播放时只保留视频声音，暂停、结束或关闭后恢复网页原有声音设置。底部时间轴默认自动循环推演；拖动时间轴或选择星期不会自动暂停，点击暂停键可定格比较，再次点击继续。</p></div></div><section class="interaction-setting" aria-labelledby="interaction-heading"><h2 id="interaction-heading">观看提示</h2><label><input id="zoom-layers" type="checkbox" hidden disabled aria-describedby="zoom-description"><span>镜头自由探索，三层独立叠加</span></label><p id="zoom-description">银白地标属于城市底图，关闭三层也会保留。温度与相对湿度曲线对应整周历史参考；“数据与映射”解释每一种变化的依据。</p></section><p class="credit">天气采用2025.06.02—08的ERA5历史参考；交通与信息流是公开资料约束下的2050艺术情景。地标形态与显示比例经过艺术处理。这里展示可追溯的参考和可感知的推演，不把未来愿景当作实测结果。</p><p class="credit"><a href="./data-notes.html?lang=zh" target="_blank" rel="noopener noreferrer">数据与艺术映射 ↗</a>　/　<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors · ODbL</a></p></dialog>
   <dialog id="place-dialog"><button class="dialog-close" aria-label="关闭地标">CLOSE ×</button><p class="eyebrow" id="place-coord"></p><h1 id="place-name"></h1><p id="place-description"></p><p class="credit">现有地标 · 形体艺术化表达</p></dialog>
+  <script id="artwork-boot">
+/* A dependency-free loading/error surface also survives a failed module graph. */
+(()=>{
+ const label=document.getElementById('landing-load'),retry=document.getElementById('landing-retry');
+ let stage='loading',detail=null,ready=false,failed=false,slow=false,slowTimer=null,progressTimer=null;
+ let entryOwnerReady=false,earlyEntry=false;
+ const zh=()=>document.documentElement.lang.startsWith('zh');
+ const say=(a,b)=>zh()?a:b;
+ function render(){
+  if(!label)return;
+  if(ready){label.hidden=true;if(retry)retry.hidden=true;return;}
+  label.hidden=false;
+  if(failed){
+   label.textContent=say('城市暂时未能加载完成，请检查网络后重试。','THE CITY COULD NOT FINISH LOADING. CHECK YOUR CONNECTION AND RETRY.');
+   if(retry){retry.hidden=false;retry.textContent=say('重新加载作品','RETRY LOADING');}
+   return;
+  }
+  if(retry){retry.hidden=!slow;if(slow)retry.textContent=say('加载较慢？重新尝试','LOADING SLOWLY? RETRY');}
+  if(stage==='preparing')label.textContent=say('城市数据已就绪，正在绘制上海…','CITY DATA READY · DRAWING SHANGHAI…');
+  else if(detail?.totalBytes){
+   const mb=n=>(n/1000000).toFixed(1);
+   label.textContent=say(`正在加载城市 · ${mb(detail.receivedBytes)} / ${mb(detail.totalBytes)} MB · ${detail.completed}/${detail.total}`,`LOADING THE CITY · ${mb(detail.receivedBytes)} / ${mb(detail.totalBytes)} MB · ${detail.completed}/${detail.total}`);
+  }else label.textContent=say('正在准备城市体验…','PREPARING THE CITY EXPERIENCE…');
+ }
+ function fail(error){
+  if(ready||failed)return;failed=true;clearTimeout(slowTimer);clearTimeout(progressTimer);
+  console.error('Shanghai 2050 could not start:',error?.message??error);
+  document.getElementById('explore-button')?.removeAttribute('aria-busy');
+  document.getElementById('globe-marker')?.removeAttribute('aria-busy');
+  render();
+  window.dispatchEvent(new CustomEvent('sh2050:load-failed',{detail:{message:error?.message??String(error)}}));
+ }
+ window.SH2050_BOOT={
+  progress(value){if(failed||ready)return;detail=value;if(!progressTimer)progressTimer=setTimeout(()=>{progressTimer=null;render();},100);},
+  phase(value){if(failed||ready)return;stage=value;render();},
+  fail,
+  ready(){ready=true;clearTimeout(slowTimer);clearTimeout(progressTimer);render();},
+  consumeEntryIntent(){entryOwnerReady=true;const requested=earlyEntry&&!failed;earlyEntry=false;return requested;},
+  get failed(){return failed;},
+ };
+ // Preserve a click made while the navigation module is still downloading.
+ // Once site.js owns the buttons, their ordinary handlers remain the sole entry path.
+ window.addEventListener('click',event=>{
+  if(entryOwnerReady||failed||!event.target?.closest?.('#explore-button,#globe-marker'))return;
+  earlyEntry=true;
+  document.getElementById('explore-button')?.setAttribute('aria-busy','true');
+  document.getElementById('globe-marker')?.setAttribute('aria-busy','true');
+ },true);
+ // Module script errors include failed imports, before app.mjs can enter its try/catch.
+ window.addEventListener('error',event=>{
+  const target=event.target;
+  if(target?.tagName==='SCRIPT'&&target.hasAttribute('data-city-critical'))fail(new Error('A required artwork module could not load.'));
+ },true);
+ window.addEventListener('sh2050:error',event=>fail(event.detail??new Error('City initialization failed.')));
+ window.addEventListener('sh2050:ready',()=>window.SH2050_BOOT.ready());
+ window.addEventListener('sh2050:language',render);
+ // If even the first module request stalls, the visitor has an explicit exit from waiting.
+ slowTimer=setTimeout(()=>{if(!ready&&!failed){slow=true;render();}},45000);
+ render();
+})();
+</script>
+  <script type="module" src="./week/interaction-bootstrap.mjs?v=20261105-stability"></script>
   <script type="module" src="./sound.js"></script>
-  <script type="module" src="./week/app.mjs"></script>
+  <script type="module" src="./week/app.mjs?v=20261105-stability" data-city-critical></script>
   <script type="module" src="./globe.js"></script>
-  <script type="module" src="./site.js"></script>
+  <script type="module" src="./site.js?v=20261105-stability" data-city-critical></script>
   <script type="module" src="./echoes.js"></script>
 </body></html>
 

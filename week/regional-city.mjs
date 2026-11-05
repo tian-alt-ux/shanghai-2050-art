@@ -23,8 +23,9 @@ function roofBodies(raw,scene,covers){
   mesh.count=count;mesh.instanceMatrix.needsUpdate=true;
  };
 }
-export async function loadRegional(scene,pulse,landmarks){
- const [p,road,water,edge,roof]=await Promise.all(['regional-buildings.bin','regional-roads.bin','regional-water.bin','regional-building-edges.bin','regional-roof-volumes.bin'].map(load));
+export async function loadRegional(scene,pulse,landmarks,{loadBinary}={}){
+ const read=loadBinary?async name=>new Float32Array(await loadBinary(name)):load;
+ const [p,road,water,edge,roof]=await Promise.all(['regional-buildings.bin','regional-roads.bin','regional-water.bin','regional-building-edges.bin','regional-roof-volumes.bin'].map(read));
  // Only the two freestanding particle towers replace overlapping blue placeholder bodies.
  const footprints=landmarks.filter(l=>l.artworkFootprint).map(l=>{const q=projectGeo(l.lon,l.lat);return {x:q[0],z:q[2],rx:l.id==='shanghai-tower'?2.45:1.1,rz:l.id==='shanghai-tower'?1.85:1.1};});
  const covers=(x,z,rx=0,rz=0)=>footprints.some(f=>Math.abs(x-f.x)<f.rx+rx&&Math.abs(z-f.z)<f.rz+rz);

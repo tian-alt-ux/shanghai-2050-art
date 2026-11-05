@@ -118,6 +118,7 @@ async function enterArtwork(skipAnimation=false) {
     return;
   }
   if (!artReady) {
+    if (window.SH2050_BOOT?.failed) { showArtworkError(); return; }
     pendingEntry = true;
     loadLabel.hidden = false;
     exploreButton.setAttribute('aria-busy','true');
@@ -185,9 +186,10 @@ window.addEventListener('sh2050:ready', () => {
 function showArtworkError() {
   pendingEntry = false;
   exploreButton.removeAttribute('aria-busy');
-  loadLabel.hidden = true;
   exploreButton.disabled = true;
   shanghaiButton.disabled = true;
+  if (window.SH2050_BOOT) { window.SH2050_BOOT.fail(new Error('City initialization failed.')); return; }
+  loadLabel.hidden = true;
   if (document.querySelector('.landing-error')) return;
   const message = document.createElement('p');
   message.className = 'landing-error';
@@ -204,11 +206,13 @@ function showArtworkError() {
   message.after(retry);
 }
 window.addEventListener('sh2050:error', showArtworkError);
+window.addEventListener('sh2050:load-failed', showArtworkError);
 if (window.SH2050?.ready) artReady = true;
 setLanguage(lang);
 if (artReady) loadLabel.hidden = true;
-if (window.SH2050?.error) showArtworkError();
+if (window.SH2050?.error || window.SH2050_BOOT?.failed) showArtworkError();
 if (['about','plans','contact'].includes(initialQuery.get('menu'))) openMenu(initialQuery.get('menu'));
+if (window.SH2050_BOOT?.consumeEntryIntent?.()) enterArtwork();
 
 // A fixed star arrangement echoes the observational grid without a tiled pattern.
 document.querySelectorAll('.landing-stars, .menu-stars').forEach(field => {

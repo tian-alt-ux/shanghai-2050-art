@@ -1,14 +1,14 @@
-import {loadRegional,projectGeo} from './regional-city.mjs';
+import {loadRegional,projectGeo} from './regional-city.mjs?v=20261105-stability';
 import {createRegionalTraffic} from './regional-traffic.mjs';
 import {CITY_FADE_UNIFORMS,cityFadeAt} from './horizon-field.mjs';
 import {placeNarrative,facilityNarrative} from './place-narratives.mjs';
 import {applyProjectAboutDialog} from './project-copy.mjs';
 import {createCameraNavigation} from './camera-navigation.mjs';
-import {createGestureInput} from './gesture-input.mjs';
+import {createResourceLoader} from './resource-loader.mjs?v=20261105-stability';
 import {createWeatherReference} from './weather-reference.mjs';
 import {loadContext} from './context-city.mjs';
 import {landmarkDisplayNear} from './landmark-forms.mjs';
-import {createLandmarkMedia} from './landmark-media.mjs';
+import {createLandmarkMedia} from './landmark-media.mjs?v=20261105-stability';
 import {makeSignals} from './signal-visuals.mjs';
 import {dataArtCopy,trafficCaption} from './week-copy.mjs';
 import {makePulseCityField} from './pulse-city-field.mjs';
@@ -38,7 +38,8 @@ let lastTick=0,lastUi=-1,lastSample='',lastHeatSample='',dirty=true,labels=[],ch
 const active=()=>!document.hidden&&document.body.dataset.view==='artwork'&&!document.querySelector('dialog[open]');
 const zh=()=>state.lang==='zh';
 const say=(a,b)=>zh()?a:b;
-const fetchJSON=async name=>{const r=await fetch(new URL(`./data/${name}.json`,import.meta.url));if(!r.ok)throw new Error(`${name}: ${r.status}`);return r.json();};
+const resources=createResourceLoader({onProgress:value=>window.SH2050_BOOT?.progress(value)});
+const fetchJSON=name=>resources.json(`${name}.json`);
 function conditionAt(h){const f=week.frames[Math.min(672,Math.floor(Math.max(0,h)*4))];return {rainIndex:weather.weatherAt(h).rainIndex,trafficPressure:f.totals.meanPressure??Math.min(1,f.totals.queue/400)};}
 function addLabel(name,en,position,layer,detail,id){const b=document.createElement('button'),leader=document.createElement('i');b.className='landmark';if(id==='oriental-pearl'||id==='shanghai-tower')b.classList.add('skyline-label');leader.className='landmark-leader';b.type='button';b.onclick=()=>id?focusPlace(id):inspect(name,en,detail);$('landmarks').append(leader,b);labels.push({b,leader,name,en,position,layer,id});}
 function inspect(title,en,description){$('place-name').textContent=say(title,en);$('place-coord').textContent='SHANGHAI / 2050 · PLACE & RHYTHM';$('place-description').textContent=typeof description==='string'?description:say(...description);$('place-dialog').querySelector('.credit').textContent=say('城市记忆 · 日常连接','CITY MEMORY · EVERYDAY CONNECTIONS');$('place-dialog').showModal();}
@@ -177,17 +178,18 @@ function navigationChanged(){dirty=true;if(cameraNav&&!cameraNav.state.moving&&c
 function tick(now){requestAnimationFrame(tick);const dt=lastTick?Math.min(.1,(now-lastTick)/1000):0;lastTick=now;const isActive=active();controls.enabled=isActive;landmarkMedia?.setActive(isActive);if(!isActive){window.SH2050_SOUND?.updateWeather?.({active:false});return;}if(state.playing){state.hour=advanceWeek(state.hour,dt,state.speed);dirty=true;}controls.update();cameraNav.update(dt);if(dirty){update();bloom.render();dirty=false;}if(now-lastUi>150){refreshUI();lastUi=now;}}
 async function init(){try{
  renderer=new THREE.WebGLRenderer({canvas:$('world'),antialias:false,powerPreference:'high-performance'});renderer.outputColorSpace=THREE.LinearSRGBColorSpace;renderer.setClearColor('#01040c');scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(47,innerWidth/innerHeight,.1,12000);controls=new OrbitControls(camera,$('world'));controls.zoomToCursor=true;controls.enableDamping=true;controls.dampingFactor=.08;controls.maxPolarAngle=Math.PI*.47;controls.minDistance=28;controls.maxDistance=2200;controls.rotateSpeed=.4;controls.addEventListener('change',()=>dirty=true);cameraNav=createCameraNavigation(camera,controls,$('world'),{isActive:active,onChange:navigationChanged});Object.values(groups).forEach(g=>scene.add(g));scene.add(landmarkBase);scene.add(new THREE.AmbientLight('#699bd2',2));
+ await resources.preload();window.SH2050_BOOT?.phase('preparing');
  [network,catalog,signalNetwork]=await Promise.all(['road-network','building-catalog','signal-network'].map(fetchJSON));
  weather=createWeatherReference(await fetchJSON('historical-era5-reference'));
  skyReference=createSkyReference(await fetchJSON('historical-era5-sky-reference'));sky=makeWeatherSky(groups.nature,skyReference);
  landmarks=(await fetchJSON('artwork-landmarks')).landmarks;
  const simulation=createTrafficSimulation(network,{rainAt:h=>weather.weatherAt(h).rainIndex});week=simulation.generateWeek({construction:false});signalNetwork=createSignalNetwork(signalNetwork,catalog,{landmarks});
- const gltf=await new GLTFLoader().loadAsync(new URL('./data/shanghai-sample.glb',import.meta.url).href);model=gltf.scene;model.scale.setScalar(unit);scene.add(model);
+ const gltf=await new GLTFLoader().parseAsync(await resources.binary('shanghai-sample.glb'),new URL('./data/',import.meta.url).href);model=gltf.scene;model.scale.setScalar(unit);scene.add(model);
  model.visible=false;model.traverse(o=>{if(o.name==='Buildings')buildings=o;});
  // The original core is retained for identity picking only, never rendered.
  const mask=makeWaterMask(await fetchJSON('source-water-mask'));tide=makeTide(groups.nature,mask);tide.rain.visible=false;heat=makeHeat(network,mask,groups.culture);roads=makeRoads(network,groups.culture);makeActivity();
 
- const mapResponse=await fetch(new URL('./data/building-triangle-features.bin',import.meta.url));triangleMap=new Uint32Array(await mapResponse.arrayBuffer());
+ triangleMap=new Uint32Array(await resources.binary('building-triangle-features.bin'));
  const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let down=null;const canvas=$('world');
  function selectBuilding(x,y){
   if(!active()||!Number.isFinite(x)||!Number.isFinite(y))return false;
@@ -201,18 +203,18 @@ async function init(){try{
  for(const name of ['pointercancel','lostpointercapture'])canvas.addEventListener(name,()=>{down=null;});
  window.addEventListener('sh2050:navigation',()=>{down=null;});
  contextCity=await loadContext(scene,landmarkBase,landmarks);
- regionalCity=await loadRegional(scene,groups.culture,landmarks);
+ regionalCity=await loadRegional(scene,groups.culture,landmarks,{loadBinary:name=>resources.binary(name)});
  pulseField=makePulseCityField(groups.culture,regionalCity.rawBuildingPositions);
  signals=makeSignals(signalNetwork,catalog,groups.cloud,{buildingPositions:regionalCity.rawBuildingPositions});
  regionalTraffic=createRegionalTraffic(regionalCity.rawRoadPositions,{rainAt:h=>weather.weatherAt(h).rainIndex});
- const waterResponse=await fetch(new URL('./data/regional-water-triangles.bin',import.meta.url));const regionalMask=makeWaterMask(new Float32Array(await waterResponse.arrayBuffer()),regionalTraffic.network.meta.boundsXY);
+ const regionalMask=makeWaterMask(new Float32Array(await resources.binary('regional-water-triangles.bin')),regionalTraffic.network.meta.boundsXY);
  regionalHeat=makeHeat(regionalTraffic.network,regionalMask,groups.culture,{regional:true});regionalRoads=makeRoads(regionalTraffic.network,groups.culture,{regional:true});
  landmarks.forEach(place=>{const position=new THREE.Vector3(...projectGeo(place.lon,place.lat));position.y=place.labelHeight;addLabel(place.labelZh,place.labelEn,position,'base',[place.noteZh,place.noteEn],place.id);});
  signalNetwork.nodes.forEach((n,i)=>{if(!n.isFacility||n.labelZh.startsWith('东方明珠'))return;const anchor=signals.positions[i].clone();anchor.y+=.7;addLabel(n.labelZh,n.labelEn,anchor,'cloud',[n.roleZh+' 地址：'+n.address+'。'+(n.coordinateAccuracyM?'地图锚点约 '+n.coordinateAccuracyM+' 米精度；':'')+'连线、发送率和光包时序为作者情景。',n.roleEn+' Address: '+n.address+'. Approximate map anchor; links, rates and optical packets are authored.'],'signal:'+n.id);});
  model.visible=false;
  bloom=makeBloom(renderer,scene,camera);reset();initCharts();state.ready=true;setupUI();resize();addEventListener('resize',resize);addEventListener('sh2050:navigation',()=>dirty=true);addEventListener('visibilitychange',()=>{lastTick=0;dirty=true;});
  const requestedPlace=query.get('place');if(landmarks.some(place=>place.id===requestedPlace))focusPlace(requestedPlace);
- window.SH2050_GESTURE=createGestureInput({isActive:active,isFlying:()=>cameraNav.state.flying,onOrbit:(dx,dy)=>cameraNav.gestureOrbit(dx,dy),onPan:(dx,dy)=>cameraNav.gesturePan(dx,dy),onCanvasClick:selectBuilding,onHomeOrbit:(dx,dy)=>window.SH2050_GLOBE?.gestureOrbit?.(dx,dy),onHomeClick:()=>window.SH2050_GLOBE?.gestureClick?.(),onZoom:(spread,point)=>cameraNav.gestureZoom(spread,point),onStop:()=>cameraNav.stopGesture(),onLayout:()=>{dirty=true;},getLanguage:()=>state.lang});
+ window.SH2050_GESTURE_CITY={isActive:()=>state.ready&&active(),isFlying:()=>cameraNav.state.flying,onOrbit:(dx,dy)=>cameraNav.gestureOrbit(dx,dy),onPan:(dx,dy)=>cameraNav.gesturePan(dx,dy),onCanvasClick:selectBuilding,onZoom:(spread,point)=>cameraNav.gestureZoom(spread,point),onStop:()=>cameraNav.stopGesture(),onLayout:()=>{dirty=true;}};
  $('loading').classList.add('loaded');setTimeout(()=>$('loading')?.remove(),1000);Object.assign(window.SH2050,{ready:true,version:'week-20261102-bund-shore',getState:()=>({hour:state.hour,playing:state.playing,layers:{...state.layers},camera:camera.position.toArray(),navigation:cameraNav.state,loop:true,focusedPlace:state.focusPlace,temperatureC:env?.temperatureC,humidityPct:env?.humidityPct,queue:traffic?.totals.queue,drawCalls:renderer.info.render.calls,landmarksAlwaysVisible:landmarkBase.visible,signalNodes:signalNetwork.nodes.length,signalLinks:signalNetwork.links.length,signalFieldStats:signals.fieldStats,signalActivity:sig?.meta?.activeLinks,sky:sky.sample,zoomToCursor:controls.zoomToCursor,pulseSamples:pulseField.count,trafficDay:traffic?.meta?.referenceDay,trafficMean:traffic?.totals.meanPressure}),setLanguage:lang=>{state.lang=lang==='zh'?'zh':'en';refreshLanguage();}});refreshUI();requestAnimationFrame(tick);window.dispatchEvent(new CustomEvent('sh2050:ready'));
  }catch(e){console.error(e);window.SH2050.error=e.message;$('loading')?.remove();$('error').hidden=false;$('error').querySelector('p').textContent=e.message;window.dispatchEvent(new CustomEvent('sh2050:error',{detail:{message:e.message}}));}}
 window.SH2050={ready:false,getLanguage:()=>state.lang};window.addEventListener('sh2050:language',e=>{state.lang=e.detail?.lang==='zh'?'zh':'en';refreshLanguage();});init();

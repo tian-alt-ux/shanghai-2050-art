@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {CITY_FADE_GLSL,CITY_FADE_UNIFORMS} from './horizon-field.mjs';
 import {POINT_ENERGY_GLSL} from './lighting-policy.mjs';
-import {projectGeo} from './regional-city.mjs';
+import {projectGeo} from './regional-city.mjs?v=20261105-stability';
 import {buildLandmarkForm,landmarkDisplayMaximum,landmarkDisplayLocalMaximum,landmarkDisplayNear,landmarkDisplayScale,LANDMARK_DISPLAY,LANDMARK_PLACE_DISPLAY} from './landmark-forms.mjs';
 import {placeLandmarkForm} from './landmark-placement.mjs';
 

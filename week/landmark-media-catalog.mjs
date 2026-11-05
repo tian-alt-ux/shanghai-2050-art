@@ -1,4 +1,4 @@
-/** User-supplied scene media. Originals remain untouched; videos are byte-identical copies.
+/** User-supplied scene media. Source originals remain untouched; web video packets are lossless faststart copies.
  * Images are resized JPEG display derivatives. Day/night variants follow the artwork clock;
  * single clips retain their supplied look. These are artwork scenes, not documentary recordings.
  */
@@ -146,5 +146,7 @@ export function selectLandmarkMedia(id,hour=12){
  const variant=item[wanted]?wanted:item.default?'default':item.day?'day':'night';
  const media=item[variant];if(!media)return null;
  const image=media.image?new URL(media.image,import.meta.url).href:undefined;
- return media.video?{kind:'video',src:new URL(media.video,import.meta.url).href,poster:image,variant}:{kind:'image',src:image,variant};
+ if(!media.video)return {kind:'image',src:image,variant};
+ const videoURL=new URL(media.video,import.meta.url);videoURL.searchParams.set('v','20261105-stability');
+ return {kind:'video',src:videoURL.href,poster:image,variant};
 }
