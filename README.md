@@ -25,8 +25,11 @@ The existing local installation retains the tested single-hand depth controls.
 
 ## Future Echoes
 
-Curated vision cards can be browsed. Shared submissions require a separately hosted
-API and persistent storage; GitHub Pages does not provide the local api/echoes service.
+Curated vision cards and visitor submissions share the card wall. The GitHub edition
+connects to a separate persistent Future Echoes service at
+https://tian-shanghai2050-echoes.active-horse-9863.chatgpt.site/api/echoes .
+Visitors can submit without an account and see new cards across browsers and devices.
+The local artwork continues to use its original local API and separate local collection.
 An unsuccessful submission keeps the draft on the visitor's device.
 
 ## Sources and media

@@ -1,10 +1,12 @@
 import {createEnglishLabels} from './echoes-language.mjs';
 import {createEchoCards,echoCardsCopy} from './echoes-cards.mjs';
 import {submissionKeywords} from './echoes-card-content.mjs';
+import {createEchoConnection} from './echoes-connection.mjs';
 
 const $=id=>document.getElementById(id);
 const dialog=$('echo-dialog'),form=$('echo-form'),textarea=$('echo-text'),keywordInput=$('echo-keyword-input'),submit=$('echo-submit');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const connection=createEchoConnection();
 const copy={
  en:{previewCaption:'A COLLECTION OF POSSIBLE FUTURES',entry:'EXPLORE FUTURE ECHOES',entrySmall:'READ A VISION · LEAVE YOUR OWN',close:'CLOSE',inputLabel:'YOUR VISION / SHANGHAI 2050',placeholder:'In Shanghai 2050, I hope…',submit:'REVEAL MY CARD',sending:'REVEALING…',help:'Chinese & English welcome. Your complete vision becomes a card.',success:'Your vision has joined the collection.',duplicate:'This vision is already in the collection.',empty:'Write your vision first.',badContent:'Please use text without links or markup.',tooLong:'Please keep your vision within 300 characters.',network:'The collection is unavailable. Your draft is saved here; please try again.',rate:'Please wait a moment before submitting again.',closeLabel:'Close Future Echoes',previewLabel:'Preview the vision cards'},
  zh:{previewCaption:'共同收藏的未来想象',entry:'进入未来回声',entrySmall:'浏览一段想象 · 留下你的愿望',close:'关闭',inputLabel:'你的上海2050想象',placeholder:'在2050年的上海，我希望……',submit:'让我的卡片显影',sending:'正在显影…',help:'支持中文与英文。每段完整想象将成为一张卡片。',success:'你的想象已加入共同卡片库。',duplicate:'这段想象已经在卡片库里。',empty:'先写下你的未来想象。',badContent:'请使用文字，去掉链接或代码标记。',tooLong:'请将想象控制在300个字符以内。',network:'暂时无法连接卡片库，草稿已保留，请稍后重试。',rate:'请稍候片刻再提交。',closeLabel:'关闭未来回声',previewLabel:'预览未来想象卡片'}
@@ -45,13 +47,7 @@ function adopt(data) {
  if(!data||!Array.isArray(data.words)||!Array.isArray(data.cards))throw Error('Invalid collection');
  englishLabels.registerSeeds(data.words);if(lang==='en')void englishLabels.prepare(data.words);cardsUI.adopt(data);
 }
-async function request(options={}) {
- const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
- try {
-  const response=await fetch('./api/echoes',{cache:'no-store',credentials:'same-origin',...options,signal:controller.signal});
-  const data=await response.json();if(!response.ok){const error=Error(data.error||'request_failed');error.status=response.status;throw error;}return data;
- }finally{clearTimeout(timer);}
-}
+const request=options=>connection.request(options);
 async function refresh() {
  const generation=++requestGeneration;
  try{const data=await request();if(generation===requestGeneration&&!busy)adopt(data);}catch{/* The curated library and draft remain available. */}

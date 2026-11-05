@@ -30,7 +30,7 @@ export function createEchoCards({dialog,form,englishLabels,getLanguage=()=> 'en'
     const visual=cardVisualStyle(card);
     if(card.seed)return {...card,visual,title:language==='zh'?card.titleZh:card.titleEn,description:language==='zh'?card.textZh:card.textEn,textOnly:true,openLabel:language==='zh'?'阅读想象':'READ VISION'};
     const labels=wordLabels(card);
-    const text=language==='en'?translatedNarrative(card):original(card);
+    const text=language==='en'?(translatedNarrative(card)||original(card)):original(card);
     const isShort=Array.from(original(card)).length<=24;
     const title=(isShort&&text?text:labels[0])||c().genericTitle;
     return {...card,visual,title,description:isShort?c().genericDescription:text||c().genericDescription,textOnly:true,openLabel:language==='zh'?'阅读想象':'READ VISION',isNew:card.id===freshId};
@@ -58,7 +58,7 @@ export function createEchoCards({dialog,form,englishLabels,getLanguage=()=> 'en'
     const card=display(selected);selected=card;
     $('echo-vision-title').textContent=card.title;
     $('echo-vision-kind').textContent=card.seed?c().curated:c().audience;
-    const body=card.seed?card.description:(language==='en'?translatedNarrative(card):original(card));
+    const body=card.seed?card.description:(language==='en'?(translatedNarrative(card)||original(card)):original(card));
     $('echo-vision-text').textContent=body||c().waiting;
     for(const [key,value] of Object.entries({base:card.visual.base,accent:card.visual.accent,ink:card.visual.text}))detail.style.setProperty(`--detail-${key}`,value);
     detail.dataset.family=card.visual.family;
