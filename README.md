@@ -16,10 +16,12 @@ The existing Pages site is https://tian-alt-ux.github.io/shanghai-2050-art/ .
 
 ## Camera gestures
 
-The public edition supports mouse and touch interaction. GESTURES opens an explanation
-of the local software requirement. Connecting a Femto Bolt by USB alone does not enable
-depth gestures in this static site. Depth acquisition and hand recognition currently
-run in a separate local program; this public edition does not connect to that program.
+The public edition supports mouse and touch interaction. Selecting GESTURES connects
+to the camera helper at 127.0.0.1 on the visitor's own computer. The browser may ask
+permission to access this computer / local network. No helper requests happen before
+the visitor selects GESTURES. The helper must be running with this version's origin
+allowlist and the camera runtime installed. Connecting USB alone on an unconfigured
+computer is not sufficient. Depth acquisition and hand recognition run locally.
 No camera images, camera runtime, control tokens or private logs are included here.
 The existing local installation retains the tested single-hand depth controls.
 
