@@ -8,7 +8,7 @@ import {createResourceLoader} from './resource-loader.mjs?v=20261105-stability';
 import {createWeatherReference} from './weather-reference.mjs';
 import {loadContext} from './context-city.mjs';
 import {landmarkDisplayNear} from './landmark-forms.mjs';
-import {createLandmarkMedia} from './landmark-media.mjs?v=20261105-stability';
+import {createLandmarkMedia} from './landmark-media.mjs?v=20261118-media';
 import {makeSignals} from './signal-visuals.mjs';
 import {dataArtCopy,trafficCaption} from './week-copy.mjs';
 import {makePulseCityField} from './pulse-city-field.mjs';

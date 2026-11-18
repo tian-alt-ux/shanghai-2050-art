@@ -1,4 +1,4 @@
-import {selectLandmarkMedia} from './landmark-media-catalog.mjs?v=20261105-stability';
+import {selectLandmarkMedia} from './landmark-media-catalog.mjs?v=20261118-media';
 import {placeLandmarkMedia,landmarkMediaSize} from './landmark-media-layout.mjs';
 
 /** One lazy screen-space window attached to a world-space landmark.
@@ -12,13 +12,13 @@ export function createLandmarkMedia(parent){
  const close=document.createElement('button');close.type='button';close.className='landmark-media-close';close.textContent='×';
  head.append(title,toggle,close);
  const stage=document.createElement('div');stage.className='landmark-media-stage';
- const video=document.createElement('video');video.muted=false;video.defaultMuted=false;video.playsInline=true;video.preload='metadata';video.disablePictureInPicture=true;video.disableRemotePlayback=true;video.setAttribute('playsinline','');video.setAttribute('controlslist','nofullscreen nodownload noremoteplayback');video.tabIndex=-1;
+ const video=document.createElement('video');video.muted=false;video.defaultMuted=false;video.playsInline=true;video.preload='none';video.disablePictureInPicture=true;video.disableRemotePlayback=true;video.setAttribute('playsinline','');video.setAttribute('controlslist','nofullscreen nodownload noremoteplayback');video.tabIndex=-1;
  const image=document.createElement('img');image.decoding='async';image.draggable=false;
  const replay=document.createElement('button');replay.type='button';replay.className='landmark-media-replay';replay.hidden=true;
  const status=document.createElement('p');status.className='landmark-media-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  stage.append(video,image,replay,status);root.append(head,stage);parent.append(root);
  const ns='http://www.w3.org/2000/svg',connector=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');connector.id='landmark-media-connector';connector.setAttribute('aria-hidden','true');connector.setAttribute('hidden','');connector.append(line);parent.append(connector);
- let current=null,language='zh',active=true,wantsPlayback=true,layout=null,sourceToken=0,playAttempt=0,lastTransform='',audioFocused=false,phase='ready',loadTimer=null,posterFailed=false;
+ let current=null,language='zh',active=true,wantsPlayback=true,layout=null,sourceToken=0,playAttempt=0,lastTransform='',audioFocused=false,phase='ready',loadTimer=null,posterFailed=false,resumeAt=null;
  const say=(zh,en)=>language==='en'?en:zh;
  const visible=()=>!!current&&active&&!root.hidden;
  function videoAudioFocus(value){if(audioFocused===value)return;audioFocused=value;window.SH2050_SOUND?.setMediaFocus?.(value);}
@@ -54,7 +54,9 @@ export function createLandmarkMedia(parent){
  function play(reload=false){
   if(!visible()||current?.media.kind!=='video'||!wantsPlayback)return;
   const token=sourceToken,attempt=++playAttempt;
-  if(reload){video.pause();video.src=current.media.src;video.load();}
+  // A slow connection can still be filling the existing buffer. Only a real
+  // media error needs a new resource load; keep its position for metadata.
+  if(reload){resumeAt=resumeAt??(Number.isFinite(video.currentTime)?video.currentTime:0);video.pause();video.src=current.media.src;video.load();}
   if(video.ended)video.currentTime=0;
   setPhase('loading');armLoadTimer();
   // Keep play() in the actual button handler's call stack for browser activation.
@@ -75,17 +77,31 @@ export function createLandmarkMedia(parent){
  }
  function release(){
   clearLoadTimer();playAttempt++;videoAudioFocus(false);
-  for(const name of ['onplaying','onpause','onended','onloadeddata','onwaiting','onstalled','onerror'])video[name]=null;
-  image.onload=image.onerror=null;video.pause();video.removeAttribute('src');video.removeAttribute('poster');video.load();image.removeAttribute('src');
+  for(const name of ['onplaying','onpause','onended','onloadedmetadata','onloadeddata','onwaiting','onstalled','onerror'])video[name]=null;
+  resumeAt=null;image.onload=image.onerror=null;video.pause();video.preload='none';video.removeAttribute('src');video.removeAttribute('poster');video.load();image.removeAttribute('src');
  }
  function bindEvents(token){
   const selected=()=>token===sourceToken&&current?.media.kind==='video'&&(!video.currentSrc||video.currentSrc===current.media.src);
   video.onplaying=()=>{if(selected())playbackStarted();};
   video.onpause=()=>{if(!selected())return;videoAudioFocus(false);if(visible()&&phase==='playing'&&!video.ended){wantsPlayback=false;clearLoadTimer();setPhase('paused');}};
   video.onended=()=>{if(!selected())return;wantsPlayback=false;clearLoadTimer();videoAudioFocus(false);setPhase('ended');};
+  video.onloadedmetadata=()=>{
+   if(!selected()||resumeAt===null)return;
+   const position=Number.isFinite(video.duration)&&video.duration>0?Math.min(resumeAt,Math.max(0,video.duration-.05)):resumeAt;
+   try{video.currentTime=position;resumeAt=null;}catch{} // Keep the target if metadata is not seekable yet.
+  };
   video.onloadeddata=()=>{if(selected())root.classList.add('is-ready');};
   const waiting=()=>{if(!selected()||!visible()||!wantsPlayback)return;videoAudioFocus(false);setPhase('loading');armLoadTimer();};
-  video.onwaiting=video.onstalled=waiting;
+  video.onwaiting=waiting;
+  // "stalled" describes the download, not necessarily playback. Buffered
+  // frames can still be playing and must retain exclusive video audio.
+  video.onstalled=()=>{
+   if(!selected())return;
+   let bufferedAhead=false;
+   for(let i=0;i<(video.buffered?.length??0);i++)if(video.buffered.start(i)<=video.currentTime&&video.buffered.end(i)>video.currentTime+.25){bufferedAhead=true;break;}
+   if(!video.paused&&!video.ended&&(video.readyState>=3||bufferedAhead))return;
+   waiting();
+  };
   video.onerror=()=>{if(!selected())return;clearLoadTimer();videoAudioFocus(false);wantsPlayback=false;setPhase('error');};
   image.onload=()=>{if(token!==sourceToken||!current)return;posterFailed=false;root.classList.add('is-ready');if(current.media.kind==='image'){clearLoadTimer();setPhase('ready');}else labels();};
   image.onerror=()=>{if(token!==sourceToken||!current)return;posterFailed=true;if(current.media.kind==='image'){clearLoadTimer();setPhase('error');}else labels();};
@@ -94,7 +110,7 @@ export function createLandmarkMedia(parent){
   const media=selectLandmarkMedia(place.id,hour);if(!media){closeMedia();return false;}
   sourceToken++;root.hidden=true;release();language=lang;current={place,media};wantsPlayback=true;posterFailed=false;layout=null;
   root.dataset.place=place.id;root.dataset.variant=media.variant;root.dataset.kind=media.kind;root.classList.remove('is-ready');connector.setAttribute('hidden','');toggle.hidden=media.kind!=='video';bindEvents(sourceToken);
-  if(media.kind==='video'){video.hidden=false;image.src=media.poster??'';video.poster=media.poster??'';video.src=media.src;video.load();setPhase('loading');}
+  if(media.kind==='video'){video.hidden=false;image.src=media.poster??'';video.poster=media.poster??'';video.preload='auto';video.src=media.src;video.load();setPhase('loading');}
   else{video.hidden=true;image.src=media.src;setPhase('loading');}
   return true;
  }
@@ -102,7 +118,7 @@ export function createLandmarkMedia(parent){
  function userPlay(){
   if(!visible()||!current)return;
   if(current.media.kind==='image'){posterFailed=false;setPhase('loading');image.src=current.media.src;armLoadTimer();return;}
-  const reload=phase==='error'||phase==='slow';wantsPlayback=true;play(reload);
+  const reload=phase==='error';wantsPlayback=true;play(reload);
  }
  close.onclick=closeMedia;
  toggle.onclick=()=>{

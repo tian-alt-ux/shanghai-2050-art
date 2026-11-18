@@ -1,4 +1,5 @@
-/** User-supplied scene media. Source originals remain untouched; web video packets are lossless faststart copies.
+/** User-supplied scene media. Web videos are 720p H264/AAC faststart display derivatives.
+ * Full-resolution copies remain in the parent landmark-media directory.
  * Images are resized JPEG display derivatives. Day/night variants follow the artwork clock;
  * single clips retain their supplied look. These are artwork scenes, not documentary recordings.
  */
@@ -147,6 +148,6 @@ export function selectLandmarkMedia(id,hour=12){
  const media=item[variant];if(!media)return null;
  const image=media.image?new URL(media.image,import.meta.url).href:undefined;
  if(!media.video)return {kind:'image',src:image,variant};
- const videoURL=new URL(media.video,import.meta.url);videoURL.searchParams.set('v','20261105-stability');
+ const videoURL=new URL(media.video.replace('/landmark-media/','/landmark-media/web/'),import.meta.url);videoURL.searchParams.set('v','20261118-media');
  return {kind:'video',src:videoURL.href,poster:image,variant};
 }
